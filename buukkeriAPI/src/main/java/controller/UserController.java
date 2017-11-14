@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import entity.User;
+import entity.User_IF;
 import service.UserService;
 
 @RestController
@@ -16,8 +16,8 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public User getUser() {
-		return null;
+	public User_IF getUser(String email, String pass) {
+		return userService.getUser(email, pass);
 	}
 	
 	
