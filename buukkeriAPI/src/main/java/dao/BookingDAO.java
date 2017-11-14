@@ -4,10 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import entity.Booking;
 import entity.Booking_IF;
 import entity.Shift_IF;
-
+@Repository
 public class BookingDAO extends DAO implements BookingDAO_IF{
 	/** Creates Booking to database
 	 * @param bk Booking object which will be added to the database

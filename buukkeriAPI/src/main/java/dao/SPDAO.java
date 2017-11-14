@@ -4,11 +4,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import entity.SP;
 import entity.SP_IF;
 
 
-
+@Repository
 public class SPDAO extends DAO implements SPDAO_IF {
 	/**
 	 * Creates Service Provider to db.

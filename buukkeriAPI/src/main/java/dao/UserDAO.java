@@ -3,9 +3,12 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.springframework.stereotype.Repository;
+
 import entity.User;
 import entity.User_IF;
 
+@Repository
 public class UserDAO extends DAO implements UserDAO_IF {
 	/** Luo käyttäjän tietokantaan
 	 * @param user luotavan käyttäjän tiedot

@@ -1,5 +1,8 @@
 package service;
 
-public class ActivityService {
+import org.springframework.stereotype.Service;
 
+@Service
+public class ActivityService {
+//pena
 }
