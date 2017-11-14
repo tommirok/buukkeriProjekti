@@ -4,9 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import entity.Activity;
 import entity.Activity_IF;
-
+@Repository
 public class ActivityDAO extends DAO implements ActivityDAO_IF {
 	/**Creation of activity to database
 	 * @param Activity data

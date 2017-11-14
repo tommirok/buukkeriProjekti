@@ -4,9 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import entity.Shift;
 import entity.Shift_IF;
-
+@Repository
 public class ShiftDAO extends DAO implements ShiftDAO_IF{
 	/**Creates a shift to database
 	 * @param shift Shift object
