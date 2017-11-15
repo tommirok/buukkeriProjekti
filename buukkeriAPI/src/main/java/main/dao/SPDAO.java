@@ -133,7 +133,7 @@ public class SPDAO extends DAO implements SPDAO_IF {
 		ResultSet myRs = null;
 
 		try{
-			String sqlSelect = "Select * from valuutta";
+			String sqlSelect = "Select * from Service_Provider";
 			myStatement = myCon.prepareStatement(sqlSelect);
 			myRs = myStatement.executeQuery();
 
