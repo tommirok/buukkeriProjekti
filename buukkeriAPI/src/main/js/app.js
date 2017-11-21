@@ -1,10 +1,9 @@
 /**
  * @author Tommi Rokolampi
  */
-import React from 'react';
-import ReactDOM from 'react-dom';
 
-const React = ('react');
+
+const React = require ('react');
 const ReactDOM = require ('react-dom');
 
 
