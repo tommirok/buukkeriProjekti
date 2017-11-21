@@ -68,9 +68,9 @@ footer{
   width: 25%;
   height: 100px;
   margin:4%;
-  
+  white-space:normal;
   font-size: 1.8vw;
-  font-size-adjust
+  
   
 }
 

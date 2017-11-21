@@ -17,17 +17,12 @@ function callBookker(url){
 	return new Promise((resolve, reject)=>{
 		const call = new XMLHttpRequest();
 		call.open("GET",url);
-		call.onload = ()=> resolve(xhr.responseText);
-		call.onerror = ()=> reject(xhr.statusText);
+		call.onload = ()=> resolve(call.responseText);
+		call.onerror = ()=> reject(call.statusText);
 		call.send();
 	});
 }
 
-callBookker(activities).then((data)=>{
-	data = JSON.parse(data);
-	console.log(data);
-	init()
-});
 
 
 
@@ -94,7 +89,18 @@ class Header extends React.Component {
 	//mapataan listan tavarat luotaviin nappuloihin
 
 	class SportButton extends React.Component {
-	  componentDidMount() {}
+		constructor(props){
+			super(props);
+			this.state={acts: []};
+		}
+	  componentDidMount() {
+		  
+		  callBookker(activities).then((data)=>{
+				data = JSON.parse(data);
+				console.log(data);				
+				this.setState({acts: data});
+		  });
+	  }
 	  render() {
 	    const sports = [
 	      "Icehockey",
@@ -108,7 +114,10 @@ class Header extends React.Component {
 	      "Badmington"
 	    ];
 
-	    const sportsButtons = sports.map(item => <button id="button" className="btn btn-primary btn-block">{item}</button>);
+	    
+	    const sportsButtons = this.state.acts.map(item => <button key={item.id} id="button" className="btn btn-primary btn-block">{item.name}</button>);
+	    console.log(sportsButtons);
+	    
 	    return (<div id="buttongroup" className="btn-group btn-group-lg">{sportsButtons}</div>);
 	  }
 	}
