@@ -7,4 +7,5 @@ public interface UserDAO_IF {
 	boolean updateUser(User_IF user);
 	boolean deleteUser(User_IF user);
 	User_IF readUser(String email, String pass);
+	User_IF readUserByID(int id);
 }
