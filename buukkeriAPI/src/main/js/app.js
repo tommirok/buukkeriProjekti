@@ -1,7 +1,7 @@
 /**
  * @author Tommi Rokolampi
  */
-
+//Commit comment
 
 const React = require ('react');
 const ReactDOM = require ('react-dom');
@@ -10,11 +10,12 @@ const ReactDOM = require ('react-dom');
 
 
 function callBookker(url){
-	retrurn new Promise((resolve, reject)=>{
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET',url);
+	return new Promise((resolve, reject)=>{
+		const call = new XMLHttpRequest();
+		xhr.open("GET",url);
 		xhr.onload = ()=> resolve(xhr.responseText);
 		xhr.onerror = ()=> reject(xhr.statusText);
+		xhr.send();
 	});
 	
 }
@@ -23,7 +24,7 @@ class Header extends React.Component {
 	    return (
 	      <header>
 	        <h1>
-	          <a id="headerlink" href="vapaatvuorot.fi">
+	          <a id="headerlink" href="act">
 	            <em>vapaatvuorot.fi</em>
 	          </a>
 	        </h1>
