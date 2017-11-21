@@ -3,22 +3,34 @@
  */
 //Commit comment
 
+
+console.log("saaatana");
+
 const React = require ('react');
 const ReactDOM = require ('react-dom');
 //const client = require ('./client');
+const activities = 'http://localhost:8080/act/';
 
 
 
 function callBookker(url){
 	return new Promise((resolve, reject)=>{
 		const call = new XMLHttpRequest();
-		xhr.open("GET",url);
-		xhr.onload = ()=> resolve(xhr.responseText);
-		xhr.onerror = ()=> reject(xhr.statusText);
-		xhr.send();
+		call.open("GET",url);
+		call.onload = ()=> resolve(xhr.responseText);
+		call.onerror = ()=> reject(xhr.statusText);
+		call.send();
 	});
-	
 }
+
+callBookker(activities).then((data)=>{
+	data = JSON.parse(data);
+	console.log(data);
+	init()
+});
+
+
+
 class Header extends React.Component {
 	  render() {
 	    return (
@@ -45,11 +57,12 @@ class Header extends React.Component {
 	}
 
 	class App extends React.Component {
-	  /*
+	  
 	  constructor(props){
 	    super(props);
+	    this.state={act: []};
 	  }
-	  */
+	  
 	  render() {
 	    return (
 	      <app id="app" className="Appcomponent">
@@ -126,6 +139,7 @@ class Header extends React.Component {
 
 	class Main extends React.Component {
 	  render() {
+		  
 	    return (
 	      <main className="mainComponent">
 	        <Header />
