@@ -5,8 +5,19 @@
 
 const React = require ('react');
 const ReactDOM = require ('react-dom');
+//const client = require ('./client');
 
 
+
+function callBookker(url){
+	retrurn new Promise((resolve, reject)=>{
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET',url);
+		xhr.onload = ()=> resolve(xhr.responseText);
+		xhr.onerror = ()=> reject(xhr.statusText);
+	});
+	
+}
 class Header extends React.Component {
 	  render() {
 	    return (
