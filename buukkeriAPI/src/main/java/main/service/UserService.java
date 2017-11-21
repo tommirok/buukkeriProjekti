@@ -22,4 +22,7 @@ public class UserService {
  public boolean deleteUser(User_IF user) {
 	 return this.userdao.deleteUser(user);
  }
+public User_IF getUser(int id) {
+	return this.userdao.readUserByID(id);
+}
 }

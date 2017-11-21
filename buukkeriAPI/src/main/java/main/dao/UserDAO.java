@@ -164,4 +164,44 @@ public class UserDAO extends DAO implements UserDAO_IF {
 
 		return user;
 	}
+	public User_IF readUserByID(int id2) {
+		User_IF user = null;
+		PreparedStatement myStatement = null;
+		ResultSet myRs = null;
+
+		try{
+			String sqlSelect = "Select * from Account where ID = ?";
+			myStatement = myCon.prepareStatement(sqlSelect);
+			myStatement.setInt(1, id2);
+			myRs = myStatement.executeQuery();
+
+			if(myRs.next()) {
+				int ID = myRs.getInt("ID");
+				String fname = myRs.getString("Firstname");
+				String lname = myRs.getString("Lastname");
+				String pw = myRs.getString("Password");
+				String Email = myRs.getString("Email");
+				String phone = myRs.getString("Phone");
+
+				user = new User(ID, fname, lname, pw, phone, Email);
+		}
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if (myRs != null)
+					myRs.close();
+				if (myStatement != null)
+					myStatement.close();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		return user;
+	}
 }

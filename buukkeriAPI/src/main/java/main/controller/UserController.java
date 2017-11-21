@@ -23,6 +23,10 @@ public class UserController {
 	public User_IF getUser(@PathVariable("email")String email,@PathVariable("pass") String pass) {
 		return userService.getUser(email, pass);
 	}
+	@RequestMapping(value ="/id={id}" ,method = RequestMethod.GET)
+	public User_IF getUserByID(@PathVariable("id")int id) {
+		return userService.getUser(id);
+	}
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public boolean createuser(@RequestBody User user) {
 		return userService.createUser(user);
