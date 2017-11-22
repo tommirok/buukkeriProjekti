@@ -42,4 +42,8 @@ public class ActivityController {
 	public boolean deleteact(@RequestBody Activity act) {
 		return actservice.deleteact(act);
 	}
+	@RequestMapping(value ="/sportID={sportID}" ,method = RequestMethod.GET)
+	public Activity_IF[] ActivityBySportID(@PathVariable("sportID")int sportid) {
+		return actservice.getActivityBySportID(sportid);
+	}
 }

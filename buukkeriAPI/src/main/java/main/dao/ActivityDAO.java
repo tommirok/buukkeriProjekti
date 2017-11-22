@@ -137,10 +137,53 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 				int id = myRs.getInt("ID");
 				String name = myRs.getString("Name");
 				int SP_ID = myRs.getInt("SP_ID");
+				int sportID =myRs.getInt("SportID");
 				String location = myRs.getString("Location");
 				String description = myRs.getString("Description");
 
-				Activity_IF act = new Activity(id,name,SP_ID,location,description);
+				Activity_IF act = new Activity(id,name,SP_ID,sportID,location,description);
+				activities.add(act);
+			}
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if (myRs != null)
+					myRs.close();
+				if (myStatement != null)
+					myStatement.close();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		Activity_IF[] palautus = new Activity[activities.size()];
+		return (Activity_IF[])activities.toArray(palautus);
+	}
+	public Activity_IF[] readActivitiesBySportID(int sport_id) {
+		ArrayList<Activity_IF> activities = new ArrayList();
+		PreparedStatement myStatement = null;
+		ResultSet myRs = null;
+
+		try{
+			String sqlSelect = "Select * from Activity where SP_ID = ?";
+			myStatement = myCon.prepareStatement(sqlSelect);
+			myStatement.setInt(1, sport_id);
+			myRs = myStatement.executeQuery();
+
+			while(myRs.next()) {
+				int id = myRs.getInt("ID");
+				String name = myRs.getString("Name");
+				int SP_ID = myRs.getInt("SP_ID");
+				int sportID =myRs.getInt("SportID");
+				String location = myRs.getString("Location");
+				String description = myRs.getString("Description");
+
+				Activity_IF act = new Activity(id,name,SP_ID,sportID,location,description);
 				activities.add(act);
 			}
 
@@ -183,10 +226,11 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 				int id = myRs.getInt("ID");
 				String name = myRs.getString("Name");
 				int SP_ID = myRs.getInt("SP_ID");
+				int sportID =myRs.getInt("SportID");
 				String location = myRs.getString("Location");
 				String description = myRs.getString("Description");
 
-				act = new Activity(id,name,SP_ID,location,description);
+				act = new Activity(id,name,SP_ID,sportID,location,description);
 			}
 
 		}
@@ -226,10 +270,11 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 				int id = myRs.getInt("ID");
 				String name = myRs.getString("Name");
 				int sp_id = myRs.getInt("SP_ID");
+				int sportID =myRs.getInt("SportID");
 				String location = myRs.getString("Location");
 				String description = myRs.getString("Description");
 
-				Activity_IF act = new Activity(id,name,sp_id,location,description);
+				Activity_IF act = new Activity(id,name,sp_id,sportID,location,description);
 				activities.add(act);
 			}
 

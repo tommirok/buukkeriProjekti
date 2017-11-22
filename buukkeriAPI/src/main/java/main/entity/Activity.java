@@ -9,7 +9,8 @@ public class Activity implements Activity_IF{
     private int id;
     private String name;
     private int spid;
-    private String location;
+    private int sportid;
+	private String location;
     private String description;
 
 /**
@@ -24,11 +25,12 @@ public class Activity implements Activity_IF{
  * @param location Location of activity
  * @param description Description of activity
  */
-    public Activity(String name, int spid, String location, String description) {
+    public Activity(String name, int spid,int sportid, String location, String description) {
         this.name = name;
         this.spid = spid;
         this.location = location;
         this.description = description;
+        this.sportid = sportid;
     }
 /**
  * Constructor with parameters
@@ -38,12 +40,13 @@ public class Activity implements Activity_IF{
  * @param location Location of activity
  * @param description Description of activity
  */
-    public Activity(int id, String name, int spid, String location, String description) {
+    public Activity(int id, String name, int spid,int sportid, String location, String description) {
         this.id = id;
         this.name = name;
         this.spid = spid;
         this.location = location;
         this.description = description;
+        this.sportid = sportid;
     }
     /**
      * Getter for ID number
@@ -100,6 +103,20 @@ public class Activity implements Activity_IF{
     public void setDescription(String description) {
         this.description = description;
     }
+    /**
+     * Getter for sportID
+     * @return sportid
+     */
+    public int getSportid() {
+		return sportid;
+	}
+    /**
+     * Setter for sportID
+     * @param sportid
+     */
+	public void setSportid(int sportid) {
+		this.sportid = sportid;
+	}
 
 
 }

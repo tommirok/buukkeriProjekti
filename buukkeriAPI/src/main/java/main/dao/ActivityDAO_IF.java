@@ -9,5 +9,5 @@ public interface ActivityDAO_IF {
 	Activity_IF[] readActivitiesBySPId(int sp_id);
 	Activity_IF readActivityById(int id);
 	Activity_IF[] readActivities();
-
+	Activity_IF[]readActivitiesBySportID(int sport_id);
 }

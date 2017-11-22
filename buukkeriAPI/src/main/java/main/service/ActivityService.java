@@ -36,4 +36,8 @@ public class ActivityService {
 	public boolean deleteact(Activity act) {
 		return actdao.deleteActivity(act);
 	}
+
+	public Activity_IF[] getActivityBySportID(int sportid) {
+		return actdao.readActivitiesBySportID(sportid);
+	}
 }
