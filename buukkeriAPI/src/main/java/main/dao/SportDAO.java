@@ -81,4 +81,35 @@ public class SportDAO extends DAO implements SportDAO_IF {
 		}
 	}
 
+	@Override
+	public boolean delsport(Sport_IF sport) {
+		PreparedStatement myStatement = null;
+		String query = null;
+		int count = 0;
+		try{
+			query = "delete from Sport where ID = ?";
+			myStatement = myCon.prepareStatement(query);
+			myStatement.setInt(1, sport.getID());
+			count = myStatement.executeUpdate();
+			System.out.println("Sport has been Deleted");
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally{
+			try {
+				if (myStatement != null)
+					myStatement.close();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		if(count!=1){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 }

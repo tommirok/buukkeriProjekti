@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import main.dao.SportDAO;
+import main.entity.Sport;
 import main.entity.Sport_IF;
 @Service
 public class SportService {
@@ -13,6 +14,14 @@ public class SportService {
 
 	public Sport_IF[] readSports() {
 		return sportdao.getSports();
+	}
+
+	public boolean createsport(Sport_IF sport) {
+		return sportdao.newsport(sport);
+	}
+
+	public boolean deletesport(Sport sport) {
+		return sportdao.delsport(sport);
 	}
 
 }
