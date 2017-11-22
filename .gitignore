@@ -19,3 +19,4 @@ local.properties
 
 # Node.js
 node_modules/
+built/
