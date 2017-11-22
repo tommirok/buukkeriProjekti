@@ -7,6 +7,9 @@ public class Sport implements Sport_IF {
 	public Sport(String name) {
 		this.name = name;
 	}
+	public Sport() {
+		
+	}
 
 	public Sport(int iD, String name) {
 		ID = iD;

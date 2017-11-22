@@ -20,7 +20,7 @@ public class SportService {
 		return sportdao.newsport(sport);
 	}
 
-	public boolean deletesport(Sport sport) {
+	public boolean deletesport(Sport_IF sport) {
 		return sportdao.delsport(sport);
 	}
 
