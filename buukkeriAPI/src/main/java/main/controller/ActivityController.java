@@ -1,7 +1,9 @@
 package main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,16 +30,16 @@ public class ActivityController {
 	public Activity_IF[] ActivityBySPID(@PathVariable("spid")int spid) {
 		return actservice.getActivityBySPID(spid);
 	}
-	@RequestMapping(method = RequestMethod.POST)
-	public boolean createact(Activity act) {
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public boolean createact(@RequestBody Activity act) {
 		return actservice.createact(act);
 	}
-	@RequestMapping(method = RequestMethod.PUT)
-	public boolean updateact(Activity act) {
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public boolean updateact(@RequestBody Activity act) {
 		return actservice.updateact(act);
 	}
-	@RequestMapping(method = RequestMethod.DELETE)
-	public boolean deleteact(Activity act) {
+	@RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public boolean deleteact(@RequestBody Activity act) {
 		return actservice.deleteact(act);
 	}
 }
