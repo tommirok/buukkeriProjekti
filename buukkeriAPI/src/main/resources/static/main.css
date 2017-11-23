@@ -16,7 +16,6 @@ main{
 
 #schedule{
   display:grid;
-  background-color: #7E57C2;
   width:100%;
   height:90vh;
   
@@ -27,9 +26,13 @@ main{
     "schedule2";
 }
 
+#schedule1.well{
+	margin-bottom: 0;
+}
+
+
 header{
   grid-area: header;
-  /*background-color: #F50057 ;*/
   padding-top: 5%;
   padding-left: 10%;
   padding-right: 5%;
@@ -37,28 +40,25 @@ header{
 }
 
 signin{
-  grid-area: signin ;
-  /*background-color: #64DD17 ;*/
+  grid-area: signin;
   
 }
 
 app{
-  grid-area: appis ;
-  background-color: #FF8A80 ;
-  padding:10%;
+  grid-area: appis;
+  background-color: #FF8A80;
 }
 
 footer{
-  grid-area: footer ;
-  background-color: #0288D1 ;
+  grid-area: footer;
+  text-align: center;
 }
-
 
 #headerlink{
-  font-family: fantasy;
   color:#B0BEC5;
-   
+  text-decoration: none; 
 }
+
 #buttongroup{
   
   
@@ -70,8 +70,6 @@ footer{
   margin:4%;
   white-space:normal;
   font-size: 1.8vw;
-  
-  
 }
 
 #schedule1{

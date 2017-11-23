@@ -52,12 +52,12 @@ class Header extends React.Component {
 	}
 
 	class App extends React.Component {
-	  
+
 	  constructor(props){
 	    super(props);
 	    this.state={act: []};
 	  }
-	  
+
 	  render() {
 	    return (
 	      <app id="app" className="Appcomponent">
@@ -94,10 +94,10 @@ class Header extends React.Component {
 			this.state={acts: []};
 		}
 	  componentDidMount() {
-		  
+
 		  callBookker(activities).then((data)=>{
 				data = JSON.parse(data);
-				console.log(data);				
+				console.log(data);
 				this.setState({acts: data});
 		  });
 	  }
@@ -114,15 +114,15 @@ class Header extends React.Component {
 	      "Badmington"
 	    ];
 
-	    
+
 	    const sportsButtons = this.state.acts.map(item => <button key={item.id} id="button" className="btn btn-primary btn-block">{item.name}</button>);
 	    console.log(sportsButtons);
-	    
+
 	    return (<div id="buttongroup" className="btn-group btn-group-lg">{sportsButtons}</div>);
 	  }
 	}
-	                                     
-	                                     
+
+
 	class Schedule extends React.Component {
 	  render() {
 	    return (
@@ -139,16 +139,14 @@ class Header extends React.Component {
 	class Footer extends React.Component {
 	  render() {
 	    return (
-	      <footer id="footer" className="footercomponent">
-	        Footer
-	      </footer>
+	      <footer id="footer" className="footercomponent">@{new Date().getFullYear()} vapaatvuorot.fi</footer>
 	    );
 	  }
 	}
 
 	class Main extends React.Component {
 	  render() {
-		  
+
 	    return (
 	      <main className="mainComponent">
 	        <Header />
