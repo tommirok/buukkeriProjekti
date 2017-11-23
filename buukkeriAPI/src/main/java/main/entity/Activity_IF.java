@@ -10,6 +10,9 @@ public interface Activity_IF {
 	public void setLocation(String location);
 	public String getDescription();
 	public void setDescription(String description);
+    public int getSportid();
+	public void setSportid(int sportid);
+
 
 
 }

@@ -20,12 +20,13 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 		String query = null;
 		int count = 0;
 		try{
-			query = "insert ignore into Activity values(default,?, ?, ?, ?);";
+			query = "insert ignore into Activity values(default,?, ?, ?, ?,?);";
 			myStatement = myCon.prepareStatement(query);
 			myStatement.setString(1, act.getName());
 			myStatement.setInt(2, act.getSpid());
 			myStatement.setString(3, act.getLocation());
 			myStatement.setString(4, act.getDescription());
+			myStatement.setInt(5, act.getSportid());
 			count = myStatement.executeUpdate();
 
 		} catch(Exception e) {
