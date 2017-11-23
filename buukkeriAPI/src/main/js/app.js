@@ -46,7 +46,7 @@ class Header extends React.Component {
 	}
 
 
-//GREETS
+//GREET
 
 function UserGreeting(props) {
 	return <h1>Welcome back!</h1>
