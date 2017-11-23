@@ -4,15 +4,17 @@
 //Commit comment
 
 
-console.log("saaatana");
+
 
 const React = require ('react');
 const ReactDOM = require ('react-dom');
 //const client = require ('./client');
+
+//endpoints
 const activities = 'http://localhost:8080/act/';
 
 
-
+//ajax calls
 function callBookker(url){
 	return new Promise((resolve, reject)=>{
 		const call = new XMLHttpRequest();
@@ -26,12 +28,15 @@ function callBookker(url){
 
 
 
+
+
+//HEADER COMPONENT
 class Header extends React.Component {
 	  render() {
 	    return (
 	      <header>
 	        <h1>
-	          <a id="headerlink" href="act">
+	          <a id="headerlink" href="http://localhost:8080">
 	            <em>vapaatvuorot.fi</em>
 	          </a>
 	        </h1>
@@ -39,18 +44,127 @@ class Header extends React.Component {
 	    );
 	  }
 	}
-	class Sign_In extends React.Component {
+
+
+//GREETS
+
+function UserGreeting(props) {
+	return <h1>Welcome back!</h1>
+}
+
+function GuestGreetin(props){
+	return <h1>Please sign up.</h1>
+}
+
+
+
+//LOGIN BUTTONS
+
+function LoginButton(props){
+	return(
+			<signin>
+	        <button onClick={props.onClick} className="btn btn-primary btn-lg btn-block">
+	          Kirjaudu sisään
+	        </button>
+	      </signin>
+	);
+}
+function LogoutButton(props){
+	return(
+			<signin>
+	        <button onClick={props.onClick} className="btn btn-primary btn-lg btn-block">
+	          Kirjaudu ulos
+	        </button>
+	      </signin>
+	)
+}
+
+//SIGN_IN CONTROL
+	class LoginControl extends React.Component {
+	constructor(props)
+	{
+		super(props);
+			this.handleLoginClick = 
+		this.handleLoginClick.bind(this);
+			this.handleLogoutClick = 
+		this.handleLogoutClick.bind(this);
+			this.state={isLoggedIn : false};
+		
+		
+	}
+	
+	handleLoginClick(){
+		this.setState({isLoggedIn:true});
+	}
+	handleLogoutClick(){
+		this.setState({isLoggedIn: false});
+	}
+	
+	
 	  render() {
+		  const IsLoggedIn = this.state.isLoggedIn;
+		  
+		  let button= null;
+		  
+		  if (IsLoggedIn){
+			  button = <LogoutButton onClick=
+				  {this.handleLogoutClick} />;
+		  }
+		  else{
+			  button = <LoginButton onClick=
+				  {this.handleLoginClick} />
+		  }
+		  
 	    return (
 	      <signin>
-	        <button onClick="" className="btn btn-primary btn-lg btn-block">
+	        <button className="btn btn-primary btn-lg btn-block">
 	          Kirjaudu sisään
 	        </button>
 	      </signin>
 	    );
 	  }
 	}
-
+	
+	
+	//REGISTRATION
+	class Registration extends React.Component{
+		constructor(props){
+			super(props)
+			this.state={
+				email:"",
+				password: ""
+			};
+		}
+		
+		
+		render(){
+			return(
+					<div className="form-inline">
+				      <h2>Sign Up</h2>
+				      		<div className="form-group">
+				      			<input className="form-control"
+				      			type="text"
+				      				placeholder="email"
+				      					onChange={event => this.setState({email: event.target.value})}/>
+				      			
+				      			<input className="fomr-control"
+				      				type="password"
+				      					placeholder="password"
+				      						onChange={event => this.setState({password: event.target.value})}/>
+				      						
+				      			
+				      			<button className="btn btn-primary" 
+				      				type="button"
+				      				onClick={() => this.signUp()}>
+				      			Kirjaudu sisään
+				      			</button>
+				      			
+				      		</div>
+				      </div>		
+			)
+		}
+	}
+//APP COMPONENT 
 	class App extends React.Component {
 	  
 	  constructor(props){
@@ -124,6 +238,12 @@ class Header extends React.Component {
 	                                     
 	                                     
 	class Schedule extends React.Component {
+		constructor(props)
+		{
+			super(props);
+			this.state={acts: []}
+			
+		}
 	  render() {
 	    return (
 	      <div id="schedule" className="">
@@ -152,7 +272,7 @@ class Header extends React.Component {
 	    return (
 	      <main className="mainComponent">
 	        <Header />
-	        <Sign_In />
+	        <LoginControl />
 	        <App />
 	        <Footer />
 	      </main>
