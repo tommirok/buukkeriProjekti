@@ -138,7 +138,7 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 				int id = myRs.getInt("ID");
 				String name = myRs.getString("Name");
 				int SP_ID = myRs.getInt("SP_ID");
-				int sportID =myRs.getInt("SportID");
+				int sportID = myRs.getInt("Sport_ID");
 				String location = myRs.getString("Location");
 				String description = myRs.getString("Description");
 
@@ -180,7 +180,7 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 				int id = myRs.getInt("ID");
 				String name = myRs.getString("Name");
 				int SP_ID = myRs.getInt("SP_ID");
-				int sportID =myRs.getInt("SportID");
+				int sportID =myRs.getInt("Sport_ID");
 				String location = myRs.getString("Location");
 				String description = myRs.getString("Description");
 
@@ -227,7 +227,7 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 				int id = myRs.getInt("ID");
 				String name = myRs.getString("Name");
 				int SP_ID = myRs.getInt("SP_ID");
-				int sportID =myRs.getInt("SportID");
+				int sportID =myRs.getInt("Sport_ID");
 				String location = myRs.getString("Location");
 				String description = myRs.getString("Description");
 
@@ -271,7 +271,7 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 				int id = myRs.getInt("ID");
 				String name = myRs.getString("Name");
 				int sp_id = myRs.getInt("SP_ID");
-				int sportID =myRs.getInt("SportID");
+				int sportID =myRs.getInt("Sport_ID");
 				String location = myRs.getString("Location");
 				String description = myRs.getString("Description");
 
