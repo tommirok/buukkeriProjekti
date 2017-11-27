@@ -1,9 +1,10 @@
 /*setting grid grid*/
 main{
-  background-image:url();
+  background-image:url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5984475.jpg");
+
   display: grid;
   width: 100%;
-  height: 90vh;
+  height: 100%;
   
   /*assaigning grid roles*/
   grid-template-rows: 100px auto  60px;
@@ -52,6 +53,8 @@ app{
 footer{
   grid-area: footer;
   text-align: center;
+  grid-area: footer ;
+  /*background-color: #0288D1 ;*/
 }
 
 #headerlink{
