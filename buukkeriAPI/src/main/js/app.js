@@ -13,6 +13,8 @@ const ReactDOM = require ('react-dom');
 //endpoints
 const activities = 'http://localhost:8080/act/';
 
+var domain = 'http://localhost:8080/';
+
 
 //ajax calls
 function callBookker(url){
@@ -36,8 +38,8 @@ class Header extends React.Component {
 	    return (
 	      <header>
 	        <h1>
-	          <a id="headerlink" href="http://localhost:8080">
-	            <em>vapaatvuorot.fi</em>
+	          <a id="headerlink" href=url('/')>
+	          <img href=url('/src/main/img/logo.png')>
 	          </a>
 	        </h1>
 	      </header>
@@ -84,28 +86,28 @@ function LogoutButton(props){
 	constructor(props)
 	{
 		super(props);
-			this.handleLoginClick = 
+			this.handleLoginClick =
 		this.handleLoginClick.bind(this);
-			this.handleLogoutClick = 
+			this.handleLogoutClick =
 		this.handleLogoutClick.bind(this);
 			this.state={isLoggedIn : false};
-		
-		
+
+
 	}
-	
+
 	handleLoginClick(){
 		this.setState({isLoggedIn:true});
 	}
 	handleLogoutClick(){
 		this.setState({isLoggedIn: false});
 	}
-	
-	
+
+
 	  render() {
 		  const IsLoggedIn = this.state.isLoggedIn;
-		  
+
 		  let button= null;
-		  
+
 		  if (IsLoggedIn){
 			  button = <LogoutButton onClick=
 				  {this.handleLogoutClick} />;
@@ -114,7 +116,7 @@ function LogoutButton(props){
 			  button = <LoginButton onClick=
 				  {this.handleLoginClick} />
 		  }
-		  
+
 	    return (
 	      <signin>
 	        <button className="btn btn-primary btn-lg btn-block">
@@ -124,8 +126,8 @@ function LogoutButton(props){
 	    );
 	  }
 	}
-	
-	
+
+
 	//REGISTRATION
 	class Registration extends React.Component{
 		constructor(props){
@@ -135,8 +137,8 @@ function LogoutButton(props){
 				password: ""
 			};
 		}
-		
-		
+
+
 		render(){
 			return(
 					<div className="form-inline">
@@ -146,25 +148,25 @@ function LogoutButton(props){
 				      			type="text"
 				      				placeholder="email"
 				      					onChange={event => this.setState({email: event.target.value})}/>
-				      			
+
 				      			<input className="fomr-control"
 				      				type="password"
 				      					placeholder="password"
 				      						onChange={event => this.setState({password: event.target.value})}/>
-				      						
-				      			
-				      			<button className="btn btn-primary" 
+
+
+				      			<button className="btn btn-primary"
 				      				type="button"
 				      				onClick={() => this.signUp()}>
 				      			Kirjaudu sisään
 				      			</button>
-				      			
+
 				      		</div>
-				      </div>		
+				      </div>
 			)
 		}
 	}
-//APP COMPONENT 
+//APP COMPONENT
 	class App extends React.Component {
 
 	  constructor(props){
@@ -242,7 +244,7 @@ function LogoutButton(props){
 		{
 			super(props);
 			this.state={acts: []}
-			
+
 		}
 	  render() {
 	    return (
