@@ -13,5 +13,9 @@ public interface Shift_IF {
 	public void setPrice(double price);
 
 	public int getActivityid();
+	
+	public String getShift_date();
+	
+	public void setShift_date(String shift_date);
 
 }

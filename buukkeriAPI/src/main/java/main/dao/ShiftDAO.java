@@ -19,11 +19,12 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 		String query = null;
 		int count = 0;
 		try{
-			query = "insert ignore into Shift values(default, ?, ?, ?);";
+			query = "insert ignore into Shift values(default, ?, ?, ?, ?);";
 			myStatement = myCon.prepareStatement(query);
 			myStatement.setString(2, shift.getShift_time());
 			myStatement.setDouble(3, shift.getPrice());
 			myStatement.setInt(1, shift.getActivityid());
+			myStatement.setString(4, shift.getShift_date());
 			count = myStatement.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -134,8 +135,9 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 				int activityid = myRs.getInt("Activity_ID");
 				float price = myRs.getFloat("Price");
 				String stime = myRs.getString("Shift_Time");
+				String sdate = myRs.getString("Shift_Date");
 
-				Shift_IF shift = new Shift(id, stime, price, activityid);
+				Shift_IF shift = new Shift(id, stime, price, activityid, sdate);
 				shifts.add(shift);
 			}
 
@@ -183,8 +185,9 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 				int activityid = myRs.getInt("Activity_ID");
 				float price = myRs.getFloat("Price");
 				String stime = myRs.getString("Shift_Time");
+				String sdate = myRs.getString("Shift_Date");
 
-				shift = new Shift(id, stime, price, activityid);
+				shift = new Shift(id, stime, price, activityid, sdate);
 			}
 
 		}

@@ -7,6 +7,7 @@ package main.entity;
 public class Shift implements Shift_IF {
 	private int id;
 	private String Shift_time;
+	private String Shift_date;
 	private double price;
 	private int activityid;
 
@@ -34,11 +35,12 @@ public class Shift implements Shift_IF {
 	 * @param price Price of the shift
 	 * @param activityid ID number of activity
 	 */
-	public Shift(int id, String shift_time, double price, int activityid) {
+	public Shift(int id, String shift_time, double price, int activityid, String shift_date) {
 		this.id = id;
 		this.Shift_time = shift_time;
 		this.price = price;
 		this.activityid = activityid;
+		this.Shift_date = shift_date;
 	}
 	/**
 	 * @return returns the ID number of Shift
@@ -76,5 +78,13 @@ public class Shift implements Shift_IF {
 	public int getActivityid() {
 		return activityid;
 	}
+	
+	public String getShift_date() {
+		return Shift_date;
+	}
+	public void setShift_date(String shift_date) {
+		Shift_date = shift_date;
+	}
+	
 
 }
