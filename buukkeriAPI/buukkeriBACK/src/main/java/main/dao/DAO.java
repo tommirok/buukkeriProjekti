@@ -12,7 +12,7 @@ public abstract class DAO {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			//TUNNELOI TÄMÄ!
-			myCon = DriverManager.getConnection("jdbc:mysql://localhost:2206/vapaatvuorot", "pena", "pena");
+			myCon = DriverManager.getConnection("jdbc:mysql://localhost:2206/vuorot", "pena", "pena");
 		} catch (Exception dBException) {
 			System.err.print(dBException);
 			System.err.println("Virhe tietokantayhteyden muodostamisessa.");

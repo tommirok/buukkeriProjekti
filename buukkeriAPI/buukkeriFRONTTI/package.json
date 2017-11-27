@@ -1,7 +1,8 @@
 {
-  "name": "buukkeriAPI",
+  "name": "buukkeriFRONT",
   "version": "0.1.0",
   "description": "bookking_site_for_sports",
+  "main": "./app",
   "repository": {
     "type": "git",
     "url": "git@github.com:romppane/buukkeriAPI.git"
@@ -13,9 +14,12 @@
     "webpack": "^1.12.2"
   },
   "scripts": {
+    "build": "webpack -p",
     "watch": "webpack --watch -d"
   },
   "devDependencies": {
+    "webpack": "1.12.9",
+    "webpack-dev-server": "1.14.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
     "babel-polyfill": "^6.16.0",
