@@ -8,10 +8,16 @@
 
 const React = require ('react');
 const ReactDOM = require ('react-dom');
+
+
 // const client = require ('./client');
 
 // endpoints
 const activities = 'http://localhost:8090/sports/';
+
+
+//muuttujat
+
 
 
 // ajax calls
@@ -24,11 +30,6 @@ function callBookker(url){
 		call.send();
 	});
 }
-
-
-
-
-
 
 // HEADER COMPONENT
 class Header extends React.Component {
@@ -47,6 +48,7 @@ class Header extends React.Component {
 
 // LOGIN BUTTONS
 
+
 function LoginButton(props){
 	return(
 			<signin>
@@ -56,174 +58,91 @@ function LoginButton(props){
 	      </signin>
 	);
 }
-function LogoutButton(props){
-	return(
-			<signin>
-	        <button onClick={props.onClick} className="btn btn-primary btn-lg btn-block">
-	          Kirjaudu ulos
-	        </button>
+
+
+class Login extends React.Component{
+	  constructor(props){
+	    super(props);
+	    this.state = {
+	      modalVisble: 'hidden',
+	    };
+	    this.toggleModal = this.toggleModal.bind(this);
+	    this.closeModal = this.closeModal.bind(this);
+	  }
+	  componentDidMount(){
+	    //
+	  }
+	  
+	  toggleModal(){
+	    this.setState({modalVisble: 'visible'});
+	  }
+	  closeModal(){
+	    this.setState({modalVisble: 'hidden'});
+	  }
+	  
+	  render(){
+		  
+		  var inputs = [
+				<input type="text" placeholder="Name" ref="Name" className="field" />,
+				<input type="text" placeholder="Name" ref="Name" className="field" />,
+				<input type="text" placeholder="Name" ref="Name" className="field" />,	
+				<input type="text" placeholder="Name" ref="Name" className="field" />,	
+				<input type="text" placeholder="Name" ref="Name" className="field" />,	
+				<input type="text" placeholder="Name" ref="Name" className="field" />
+					]
+		return (
+	      <signin className="modalDialog">
+	        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login"> Rekisteröidy </button>
+	        <div className={"form-wrapper modal " + this.state.modalVisble }  >
+	          <form id="form-submit-data" action="/se mihin lähetetään" method="post">
+	          	{inputs}
+	          </form>
+	          <button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
+	        </div>
 	      </signin>
-	)
+	    )
+	  }
+	  
+	}
+
+class CreateDialog extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	handleSubmit(e) {
+		
+	}
+
+	render() {
+		var inputs = 
+				<input type="text" placeholder="Name" ref="Name" className="field" />
+			
+		
+
+		return (
+			<signin>
+				<a href="#createEmployee">Create</a>
+
+				<div id="createEmployee" className="modalDialog">
+					<div>
+						<a href="#" title="Close" className="close">X</a>
+
+						<h2>Create new employee</h2>
+
+						<form>
+							{inputs}
+							<button onClick={this.handleSubmit}>Create</button>
+						</form>
+					</div>
+				</div>
+			</signin>
+		)
+	}
+
 }
-/*
- * //SIGN_IN CONTROL class LoginControl extends React.Component {
- * constructor(props) { super(props); this.handleLoginClick =
- * this.handleLoginClick.bind(this); this.handleLogoutClick =
- * this.handleLogoutClick.bind(this); this.state={isLoggedIn : false}; }
- * 
- * handleLoginClick(){
- * 
- * this.setState({isLoggedIn:true}); } handleLogoutClick(){
- * this.setState({isLoggedIn: false}); }
- * 
- * 
- * render() { const IsLoggedIn = this.state.isLoggedIn;
- * 
- * let button= null; let form = null;
- * 
- * if (IsLoggedIn){ button = <LogoutButton onClick= {this.handleLogoutClick} /> }
- * else{
- * 
- * 
- * button = <LoginButton onClick= {this.handleLoginClick} /> }
- * 
- * return ( <signin>
- * 
- * {button} </signin> ); } }
- * 
- * 
- * //REGISTRATION class Registration extends React.Component{
- * constructor(props){ super(props) this.state={ email:"", password: "" }; }
- * 
- * 
- * render(){ return( <div className="form-inline"> <h2>Sign Up</h2> <div
- * className="form-group"> <input className="form-control" type="text"
- * placeholder="email" onChange={event => this.setState({email:
- * event.target.value})}/>
- * 
- * <input className="fomr-control" type="password" placeholder="password"
- * onChange={event => this.setState({password: event.target.value})}/>
- * 
- * 
- * <button className="btn btn-primary" type="button" onClick={() =>
- * this.signUp()}> Kirjaudu sisään </button>
- * 
- * </div> </div> ) } }
- */
-	
-
-
-
-// VIEWWRAPPER
-	class ViewWrapper extends React.Component{
-		constructor(props)
-		{
-			super(props);
-			this.state = {
-					view_state:'quest' 
-								
-			}
-			this.handleLogin = this.handleLogin.bind(this);
-			this.handleLogout = this.handleLogout.bind(this);
-		}
-		
-		componentDidMount(){
-			
-		}
-		
-		handleLogin(){
-			
-			this.setState({view_state: !'quest'});
-		}
-		handleLogout(){
-			this.setState({view_state: 'quest'});
-		}
-		
-		render(){
-			
-			if(this.state.view_state=='quest'){
-				return <QuestView loginHandler ={this.handleLogin} />
-			}else{
-				return <PrivateView loginHandler ={this.handleLogout}/>
-						
-			}
-			
-		}
-	}
-//TELLS WHAT TO SHOW IF NOT LOGGED IN
-	class QuestView extends React.Component{
-		constructor(props)
-		{
-			super(props);
-			this.state={
-					//
-			}
-			this.loginEventHandler = this.loginEventHandler.bind(this);
-			
-		}
-		componentDidMount(){
-			this.loginEventHandler("login");//Button id
-		}
-		
-		loginEventHandler(id){
-			const loginToggler = document.getElementById(id);
-			loginToggler.addEventListener('click', this.props.loginHandler); 
-		}
-		
-		render(){
-			return(
-					<signin className="wrap">
-					<button id="reg" className="btn btn-primary btn-lg btn-block">
-			          Rekisteröidy
-			        </button>
-			        <button id="login" className="btn btn-primary btn-lg btn-block">
-			          Kirjaudu sisään
-			        </button>
-			          <div className="view">
-			          
-			          </div>
-			      </signin>
-			)
-			
-		}
-	}
-
-
-	class PrivateView extends React.Component{
-		constructor(props)
-		{
-			super(props);
-			this.state={
-					//
-			}
-			this.logoutEventHadler = this.logoutEventHandler.bind(this);
-			
-		}
-		componentDidMount(){
-			this.logoutEventHandler('login');
-			
-		}
-		
-		logoutEventHandler(id){
-			const loginToggler = document.getElementById(id);
-			loginToggler.addEventListener('click', this.props.loginHandler); 
-			
-		}
-		render(){
-			return(
-					<signin className="wrap">
-			        <button id="login" className="btn btn-primary btn-lg btn-block">
-			         Kirjaudu ulos
-			        </button>
-			          <div className="view">
-			          
-			          </div>
-			      </signin>
-			)
-			
-		}
-	}
-
 
 // APP COMPONENT
 	class App extends React.Component {
@@ -275,18 +194,7 @@ function LogoutButton(props){
 		  });
 	  }
 	  render() {
-	    const sports = [
-	      "Icehockey",
-	      "Football",
-	      "Tennis",
-	      "Poledance",
-	      "Skateboarging",
-	      "Skillskating",
-	      "Golf",
-	      "Swimming",
-	      "Badmington"
-	    ];
-
+	    
 	    
 	    const sportsButtons = this.state.acts.map(item => <button key={item.id} id="button" className="btn btn-primary btn-block">{item.name}</button>);
 	    console.log(sportsButtons);
@@ -307,6 +215,7 @@ function LogoutButton(props){
 	    return (
 	      <div id="schedule" className="">
 	        <div id='schedule1' className="well">
+	        
 	        </div>
 	        <div className="well">
 	          </div>
@@ -331,7 +240,8 @@ function LogoutButton(props){
 	    return (
 	      <main className="mainComponent">
 	      <Header />
-	       <ViewWrapper />
+	      <Login />
+	      
 	        <App />
 	        <Footer />
 	      </main>
