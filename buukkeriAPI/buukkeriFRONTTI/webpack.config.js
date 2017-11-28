@@ -22,6 +22,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
+    	
         loaders: [
             {
                 test: path.join(__dirname, '.'),
@@ -31,7 +32,9 @@ module.exports = {
                     cacheDirectory: true,
                     presets: ['es2015', 'react']
                 }
-            }
+            },
+            { test: /\.css$/, loader: "style-loader!css-loader" }
         ]
+    
     }
 };

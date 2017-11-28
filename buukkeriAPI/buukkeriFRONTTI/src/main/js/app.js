@@ -123,7 +123,7 @@ function LogoutButton(props){
 					view_state:'quest' 
 								
 			}
-			this.handelLogin = this.handleLogin.bind(this);
+			this.handleLogin = this.handleLogin.bind(this);
 			this.handleLogout = this.handleLogout.bind(this);
 		}
 		
@@ -132,7 +132,8 @@ function LogoutButton(props){
 		}
 		
 		handleLogin(){
-			this.setState({view_state: 'private'});
+			
+			this.setState({view_state: !'quest'});
 		}
 		handleLogout(){
 			this.setState({view_state: 'quest'});
@@ -172,6 +173,9 @@ function LogoutButton(props){
 		render(){
 			return(
 					<signin className="wrap">
+					<button id="reg" className="btn btn-primary btn-lg btn-block">
+			          Rekisteröidy
+			        </button>
 			        <button id="login" className="btn btn-primary btn-lg btn-block">
 			          Kirjaudu sisään
 			        </button>
@@ -209,7 +213,7 @@ function LogoutButton(props){
 			return(
 					<signin className="wrap">
 			        <button id="login" className="btn btn-primary btn-lg btn-block">
-			         
+			         Kirjaudu ulos
 			        </button>
 			          <div className="view">
 			          
