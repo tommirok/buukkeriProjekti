@@ -73,7 +73,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.group8</groupId>
-			<artifactId>buukkeriFRONT</artifactId>
+			<artifactId>buukkeriFRONTTI</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
