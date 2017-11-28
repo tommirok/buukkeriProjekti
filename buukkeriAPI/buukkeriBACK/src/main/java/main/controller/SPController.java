@@ -2,6 +2,7 @@ package main.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import main.entity.SP;
 import main.entity.SP_IF;
+import main.entity.User_IF;
 import main.service.SPService;
 
 @RestController
@@ -32,5 +34,9 @@ public class SPController {
 	@RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public boolean deletesp(@RequestBody SP sp) {
 		return spservice.deletesp(sp);
+	}
+	@RequestMapping(value ="/{email}&{pass}" ,method = RequestMethod.GET)
+	public SP_IF getSP(@PathVariable("email")String email,@PathVariable("pass") String pass) {
+		return spservice.readsp(email, pass);
 	}
 }

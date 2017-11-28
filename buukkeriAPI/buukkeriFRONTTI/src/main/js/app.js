@@ -13,7 +13,7 @@ const ReactDOM = require ('react-dom');
 // const client = require ('./client');
 
 // endpoints
-const activities = 'http://localhost:8090/sports/';
+const LOCALHOST = 'http://localhost:8090/';
 
 
 //muuttujat
@@ -187,14 +187,13 @@ class CreateDialog extends React.Component {
 		}
 	  componentDidMount() {
 		  
-		  callBookker(activities).then((data)=>{
+		  callBookker(LOCALHOST+"sports/").then((data)=>{
 				data = JSON.parse(data);
 				console.log(data);				
 				this.setState({acts: data});
 		  });
 	  }
 	  render() {
-	    
 	    
 	    const sportsButtons = this.state.acts.map(item => <button key={item.id} id="button" className="btn btn-primary btn-block">{item.name}</button>);
 	    console.log(sportsButtons);
@@ -211,6 +210,14 @@ class CreateDialog extends React.Component {
 			this.state={acts: []}
 			
 		}
+		componentDidMount() {
+			  
+			  callBookker(LOCALHOST+"act/").then((data)=>{
+					data = JSON.parse(data);
+					console.log(data);				
+					this.setState({acts: data});
+			  });
+		  }
 	  render() {
 	    return (
 	      <div id="schedule" className="">
