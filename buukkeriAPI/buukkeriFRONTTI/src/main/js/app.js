@@ -81,20 +81,26 @@ class Login extends React.Component{
 	  }
 	  
 	  render(){
-		  
+		  //We replace these with column names from database
 		  var inputs = [
-				<input type="text" placeholder="Name" ref="Name" className="field" />,
-				<input type="text" placeholder="Name" ref="Name" className="field" />,
-				<input type="text" placeholder="Name" ref="Name" className="field" />,	
-				<input type="text" placeholder="Name" ref="Name" className="field" />,	
-				<input type="text" placeholder="Name" ref="Name" className="field" />,	
-				<input type="text" placeholder="Name" ref="Name" className="field" />
-					]
+			  <div className="form-group">
+				<input key="forname" type="text" placeholder="forname" ref="Name" className="field" />
+			</div>,
+				<div className="form-group">
+				<input key="lastname" type="text" placeholder="Name" ref="Name" className="field" />
+			</div>,
+				<div className="form-group">
+				<input key="email" type="text" placeholder="Name" ref="Name" className="field" />
+			</div>,
+			<div className="form-group">
+			<input key="phone" type="text" placeholder="Name" ref="Name" className="field" />
+		</div>
+				]
 		return (
 	      <signin className="modalDialog">
-	        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login"> Rekisteröidy </button>
+	        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
 	        <div className={"form-wrapper modal " + this.state.modalVisble }  >
-	          <form id="form-submit-data" action="/se mihin lähetetään" method="post">
+	          <form className="form-inline" id="form-submit-data" action="/se mihin lähetetään" method="post">
 	          	{inputs}
 	          </form>
 	          <button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
@@ -169,7 +175,7 @@ class CreateDialog extends React.Component {
 	  render() {
 	    return (
 	      <div id="cpanel" className="controlpanelcomponent">
-	        controlpaneeelli
+	        
 	        <SportButton />
 	      </div>
 	    );
