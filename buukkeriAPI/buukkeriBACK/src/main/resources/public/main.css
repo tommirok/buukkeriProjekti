@@ -1,0 +1,85 @@
+/*setting grid grid*/
+main{
+  background-image:url("https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5984475.jpg");
+
+  display: grid;
+  width: 100%;
+  height: 100%;
+  
+  /*assaigning grid roles*/
+  grid-template-rows: 100px auto  60px;
+  grid-template-columns: 1fr 3fr 3fr 1fr;
+  grid-template-areas: 
+    "appisleft header signin appisrigth"
+    "appisleft appis appis appisrigth"   
+    "footer footer  footer footer ";
+}
+
+#schedule{
+  display:grid;
+  width:100%;
+  height:90vh;
+  
+  grid-template-rows: 80px auto;
+  
+  grid-template-areas:
+    "schedule1"
+    "schedule2";
+}
+
+#schedule1.well{
+	margin-bottom: 0;
+}
+
+
+header{
+  grid-area: header;
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 5%;
+  
+}
+
+signin{
+  grid-area: signin;
+  
+}
+
+app{
+  grid-area: appis;
+  background-color: #FF8A80;
+}
+
+footer{
+  grid-area: footer;
+  text-align: center;
+  grid-area: footer ;
+  /*background-color: #0288D1 ;*/
+}
+
+#headerlink{
+  color:#B0BEC5;
+  text-decoration: none; 
+}
+
+#buttongroup{
+  
+  
+}
+#button{
+  border-radius: 20px;
+  width: 25%;
+  height: 100px;
+  margin:4%;
+  white-space:normal;
+  font-size: 1.8vw;
+}
+
+#schedule1{
+  grid-area:schedule1;
+ 
+}
+
+#cpanel{
+ 
+}

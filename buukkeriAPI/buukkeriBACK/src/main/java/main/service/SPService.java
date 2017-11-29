@@ -25,4 +25,7 @@ public class SPService {
 	public boolean deletesp(SP_IF sp) {
 		return spdao.deleteSP(sp);
 	}
+	public SP_IF readsp(String email, String pass) {
+		return spdao.readSP(email, pass);
+	}
 }
