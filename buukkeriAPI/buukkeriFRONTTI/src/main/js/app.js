@@ -20,6 +20,16 @@ const LOCALHOST = 'http://localhost:8090/';
 
 
 
+function callUser(url){
+	return new Promise((resolve, reject)=>{
+		const call = new XMLHttpRequest();
+		call.open("POST",url);
+		call.onload = ()=> resolve(call.responseText);
+		call.onerror = ()=> reject(call.statusText);
+		call.send();
+	});
+}
+
 // ajax calls
 function callBookker(url){
 	return new Promise((resolve, reject)=>{
@@ -37,7 +47,7 @@ class Header extends React.Component {
 	    return (
 	      <header>
 	        <h1>
-	          <a id="headerlink" href="http://localhost:8080">
+	          <a id="headerlink" href="http://localhost:8080/">
 	            <em>vapaatvuorot.fi</em>
 	          </a>
 	        </h1>
@@ -65,13 +75,28 @@ class Login extends React.Component{
 	    super(props);
 	    this.state = {
 	      modalVisble: 'hidden',
+	      fname: "",
+			lname: "",
+			email: "",
+			phone: "",
+			pass: ""
 	    };
+	    
+	    
 	    this.toggleModal = this.toggleModal.bind(this);
 	    this.closeModal = this.closeModal.bind(this);
+	    this.handleSubmit = this.handleSubmit.bind(this);
+	    this.handleFname = this.handleFname.bind(this);
+	    this.handleLname = this.handleLname.bind(this);
+	    this.handleEmail = this.handleEmail.bind(this);
+	    this.handlePhone = this.handlePhone.bind(this);
+	    this.handlePass = this.handlePass.bind(this);
+	    
 	  }
 	  componentDidMount(){
-	    //
+		 
 	  }
+	  
 	  
 	  toggleModal(){
 	    this.setState({modalVisble: 'visible'});
@@ -80,36 +105,84 @@ class Login extends React.Component{
 	    this.setState({modalVisble: 'hidden'});
 	  }
 	  
+	  handleFname(e){
+		  this.setState({fname: e.target.value})
+	  }
+	  handleLname(e){
+		  this.setState({lname: e.target.value})
+	  }
+	  handleEmail(e){
+		  this.setState({email: e.target.value})
+	  }
+	  handlePhone(e){
+		  this.setState({phone: e.target.value})
+	  }
+	  handlePass(e){
+		  this.setState({pass: e.target.value})
+	  }
+	  
+	  
+		
+	  
+	  
+	  handleSubmit(){
+		  let user = {
+				  fname : this.state.fname,
+				  lname : this.state.lname,
+				  email : this.state.email,
+				  phone : this.state.phone,
+				  pass : this.state.pass
+			  }
+		  
+		  
+		  console.log("pläää")
+		  console.log(user)
+		  
+		 
+		  
+		  
+		 
+		  
+	  }
+	 
 	  render(){
-		  //We replace these with column names from database
-		  var inputs = [
-			  <div className="form-group">
-				<input key="forname" type="text" placeholder="forname" ref="Name" className="field" />
-			</div>,
-				<div className="form-group">
-				<input key="lastname" type="text" placeholder="Name" ref="Name" className="field" />
-			</div>,
-				<div className="form-group">
-				<input key="email" type="text" placeholder="Name" ref="Name" className="field" />
-			</div>,
-			<div className="form-group">
-			<input key="phone" type="text" placeholder="Name" ref="Name" className="field" />
-		</div>
-				]
+		  
+		  
+		
 		return (
-	      <signin className="modalDialog">
-	        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
-	        <div className={"form-wrapper modal " + this.state.modalVisble }  >
-	          <form className="form-inline" id="form-submit-data" action="/se mihin lähetetään" method="post">
-	          	{inputs}
-	          </form>
-	          <button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
-	        </div>
-	      </signin>
+				
+			
+			 <signin className="modalDialog">
+		        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
+		        <div className={"form-wrapper modal " + this.state.modalVisble }  >
+		        <form name="form" className="form-inline" id="form-submit-data" onSubmit={this.handleSubmit}>
+				          <div className="form-group">
+							<input key="forname" type="text" placeholder="Etunimi" ref="fname"  onChange={this.handleFname} value={this.state.fname}/>
+						</div>,
+							<div className="form-group">
+							<input key="lastname" type="text" placeholder="Sukunimi" ref="lname" onChange={this.handleLname}  value={this.state.lname}/>
+						</div>,
+							<div className="form-group">
+							<input key="email" type="text" placeholder="Sähköposti" ref="email" onChange={this.handleEmail}  value={this.state.email}/>
+						</div>,
+							<div className="form-group">
+							<input key="phone" type="text" placeholder="Puhelinumero" ref="phone" onChange={this.handlePhone}  value={this.state.phone}/>
+						</div>,
+							<div className="form-group">
+							<input key="phone" type="password" placeholder="Salasana" ref="pass" onChange={this.handlePass}  value={this.state.pass}/>
+						</div>
+				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}/>
+				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
+		          </form>
+		          
+		        </div>
+		      </signin>
 	    )
 	  }
 	  
 	}
+
+
 
 class CreateDialog extends React.Component {
 
@@ -193,7 +266,7 @@ class CreateDialog extends React.Component {
 		}
 	  componentDidMount() {
 		  
-		  callBookker(LOCALHOST+"sports/").then((data)=>{
+		  callBookker(LOCALHOST+"sports").then((data)=>{
 				data = JSON.parse(data);
 				console.log(data);				
 				this.setState({acts: data});
@@ -218,7 +291,7 @@ class CreateDialog extends React.Component {
 		}
 		componentDidMount() {
 			  
-			  callBookker(LOCALHOST+"act/").then((data)=>{
+			  callBookker(LOCALHOST+"act").then((data)=>{
 					data = JSON.parse(data);
 					console.log(data);				
 					this.setState({acts: data});

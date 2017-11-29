@@ -45,7 +45,7 @@ signin{
 
 app{
   grid-area: appis ;
-  background-color: #FF8A80 ;
+   
   padding:10%;
 }
 
@@ -84,7 +84,7 @@ footer{
   display:block;
   box-sizing:border-box;
   width: 40rem;
-  height:30rem;
+  height:auto;
   
   position:fixed;
   top:50%;
