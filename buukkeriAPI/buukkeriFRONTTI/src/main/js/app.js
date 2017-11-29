@@ -37,8 +37,8 @@ class Header extends React.Component {
 	    return (
 	      <header>
 	        <h1>
-	          <a id="headerlink" href="http://localhost:8080">
-	            <em>vapaatvuorot.fi</em>
+	          <a id="headerlink" href=LOCALHOST>
+	            <img href=LOCALHOST'src/main/img/vapaatvuorot.png'></img>
 	          </a>
 	        </h1>
 	      </header>
@@ -72,14 +72,14 @@ class Login extends React.Component{
 	  componentDidMount(){
 	    //
 	  }
-	  
+
 	  toggleModal(){
 	    this.setState({modalVisble: 'visible'});
 	  }
 	  closeModal(){
 	    this.setState({modalVisble: 'hidden'});
 	  }
-	  
+
 	  render(){
 		  //We replace these with column names from database
 		  var inputs = [
@@ -108,7 +108,7 @@ class Login extends React.Component{
 	      </signin>
 	    )
 	  }
-	  
+
 	}
 
 class CreateDialog extends React.Component {
@@ -119,14 +119,14 @@ class CreateDialog extends React.Component {
 	}
 
 	handleSubmit(e) {
-		
+
 	}
 
 	render() {
-		var inputs = 
+		var inputs =
 				<input type="text" placeholder="Name" ref="Name" className="field" />
-			
-		
+
+
 
 		return (
 			<signin>
@@ -152,12 +152,12 @@ class CreateDialog extends React.Component {
 
 // APP COMPONENT
 	class App extends React.Component {
-	  
+
 	  constructor(props){
 	    super(props);
 	    this.state={act: []};
 	  }
-	  
+
 	  render() {
 	    return (
 	      <app id="app" className="Appcomponent">
@@ -175,7 +175,7 @@ class CreateDialog extends React.Component {
 	  render() {
 	    return (
 	      <div id="cpanel" className="controlpanelcomponent">
-	        
+
 	        <SportButton />
 	      </div>
 	    );
@@ -192,35 +192,35 @@ class CreateDialog extends React.Component {
 			this.state={acts: []};
 		}
 	  componentDidMount() {
-		  
+
 		  callBookker(LOCALHOST+"sports/").then((data)=>{
 				data = JSON.parse(data);
-				console.log(data);				
+				console.log(data);
 				this.setState({acts: data});
 		  });
 	  }
 	  render() {
-	    
+
 	    const sportsButtons = this.state.acts.map(item => <button key={item.id} id="button" className="btn btn-primary btn-block">{item.name}</button>);
 	    console.log(sportsButtons);
-	    
+
 	    return (<div id="buttongroup" className="btn-group btn-group-lg">{sportsButtons}</div>);
 	  }
 	}
-	                                     
-	                                     
+
+
 	class Schedule extends React.Component {
 		constructor(props)
 		{
 			super(props);
 			this.state={acts: []}
-			
+
 		}
 		componentDidMount() {
-			  
+
 			  callBookker(LOCALHOST+"act/").then((data)=>{
 					data = JSON.parse(data);
-					console.log(data);				
+					console.log(data);
 					this.setState({acts: data});
 			  });
 		  }
@@ -228,7 +228,7 @@ class CreateDialog extends React.Component {
 	    return (
 	      <div id="schedule" className="">
 	        <div id='schedule1' className="well">
-	        
+
 	        </div>
 	        <div className="well">
 	          </div>
@@ -249,12 +249,12 @@ class CreateDialog extends React.Component {
 
 	class Main extends React.Component {
 	  render() {
-		  
+
 	    return (
 	      <main className="mainComponent">
 	      <Header />
 	      <Login />
-	      
+
 	        <App />
 	        <Footer />
 	      </main>
