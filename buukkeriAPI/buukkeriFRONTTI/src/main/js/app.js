@@ -82,7 +82,7 @@ class Login extends React.Component{
 			lname: "",
 			email: "",
 			phone: "",
-			pass: ""
+			password: ""
 	    };
 	    
 	    
@@ -93,7 +93,7 @@ class Login extends React.Component{
 	    this.handleLname = this.handleLname.bind(this);
 	    this.handleEmail = this.handleEmail.bind(this);
 	    this.handlePhone = this.handlePhone.bind(this);
-	    this.handlePass = this.handlePass.bind(this);
+	    this.handlePassword = this.handlePassword.bind(this);
 	    
 	  }
 	  componentDidMount(){
@@ -119,8 +119,8 @@ class Login extends React.Component{
 	  handlePhone(e){
 		  this.setState({phone: e.target.value})
 	  }
-	  handlePass(e){
-		  this.setState({pass: e.target.value})
+	  handlePassword(e){
+		  this.setState({password: e.target.value})
 	  }
 	  
 	  
@@ -133,12 +133,14 @@ class Login extends React.Component{
 				  lname : this.state.lname,
 				  email : this.state.email,
 				  phone : this.state.phone,
-				  pass : this.state.pass
+				  password : this.state.password
 			  }
 		  
 		  
 		  console.log("pläää")
-		  console.log(callUser("http://localhost:8090/users/",JSON.stringify(user)))
+		  console.log(user.password)
+		  console.log(JSON.stringify(user))
+		  console.log(callUser(LOCALHOST+"users/",JSON.stringify(user)))
 		  
 		 
 		  
@@ -171,7 +173,7 @@ class Login extends React.Component{
 							<input key="phone" type="text" placeholder="Puhelinumero" ref="phone" onChange={this.handlePhone}  value={this.state.phone}/>
 						</div>,
 							<div className="form-group">
-							<input key="phone" type="password" placeholder="Salasana" ref="pass" onChange={this.handlePass}  value={this.state.pass}/>
+							<input key="password" type="password" placeholder="Salasana" ref="password" onChange={this.handlePassword}  value={this.state.pass}/>
 						</div>
 				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}/>
 				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
