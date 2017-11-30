@@ -20,13 +20,14 @@ const LOCALHOST = 'http://localhost:8090/';
 
 
 
-function callUser(url){
+function callUser(url,data){
 	return new Promise((resolve, reject)=>{
 		const call = new XMLHttpRequest();
 		call.open("POST",url);
 		call.onload = ()=> resolve(call.responseText);
 		call.onerror = ()=> reject(call.statusText);
-		call.send();
+		call.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+		call.send(data);
 	});
 }
 
@@ -71,7 +72,7 @@ function LoginButton(props){
 	);
 }
 
-//LOGIN
+// LOGIN
 class Login extends React.Component{
 	  constructor(props){
 	    super(props);
@@ -81,8 +82,11 @@ class Login extends React.Component{
 			lname: "",
 			email: "",
 			phone: "",
-			pass: ""
-	    }; 
+			password: ""
+	    };
+	    
+	    
+
 	    this.toggleModal = this.toggleModal.bind(this);
 	    this.closeModal = this.closeModal.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
@@ -90,7 +94,12 @@ class Login extends React.Component{
 	    this.handleLname = this.handleLname.bind(this);
 	    this.handleEmail = this.handleEmail.bind(this);
 	    this.handlePhone = this.handlePhone.bind(this);
-	    this.handlePass = this.handlePass.bind(this);
+
+	    
+
+	    this.handlePassword = this.handlePassword.bind(this);
+	    
+
 	  }
 	  componentDidMount(){
 		 
@@ -115,8 +124,8 @@ class Login extends React.Component{
 	  handlePhone(e){
 		  this.setState({phone: e.target.value})
 	  }
-	  handlePass(e){
-		  this.setState({pass: e.target.value})
+	  handlePassword(e){
+		  this.setState({password: e.target.value})
 	  }
 
 	  handleSubmit(){
@@ -125,12 +134,14 @@ class Login extends React.Component{
 				  lname : this.state.lname,
 				  email : this.state.email,
 				  phone : this.state.phone,
-				  pass : this.state.pass
+				  password : this.state.password
 			  }]
+		  console.log("pläää")
+		  console.log(user.password)
+		  console.log(JSON.stringify(user))
+		  console.log(callUser(LOCALHOST+"users/",JSON.stringify(user)))  
 		  
-		  callUser(LOCALHOST+"users");
-		  console.log(user)  
-	  }	 
+	  }
   render(){
 		return (
 			 <signin className="modalDialog">
@@ -150,7 +161,7 @@ class Login extends React.Component{
 							<input key="phone" type="text" placeholder="Puhelinumero" ref="phone" onChange={this.handlePhone}  value={this.state.phone}/>
 						</div>,
 							<div className="form-group">
-							<input key="phone" type="password" placeholder="Salasana" ref="pass" onChange={this.handlePass}  value={this.state.pass}/>
+							<input key="password" type="password" placeholder="Salasana" ref="password" onChange={this.handlePassword}  value={this.state.pass}/>
 						</div>
 				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}>Vahvista</button>
 				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
@@ -161,10 +172,10 @@ class Login extends React.Component{
 	    )
 	  }
 
-	}
+  }
 
 
-//EI TEE MITÄÄN
+// EI TEE MITÄÄN
 class CreateDialog extends React.Component {
 
 	constructor(props) {
@@ -218,7 +229,7 @@ class CreateDialog extends React.Component {
 	    
 	  }
 	  componentDidMount() {		  
-		  //HAETAAN KANNASTA SPORTTIEN NIMIÄ
+		  // HAETAAN KANNASTA SPORTTIEN NIMIÄ
 		  callBookker(LOCALHOST+"sports").then((data)=>{
 				data = JSON.parse(data);
 				console.log(data);
@@ -251,7 +262,7 @@ class CreateDialog extends React.Component {
 	  }
 	}
 
-//SPORTBUTTON
+// SPORTBUTTON
 	class SportButton extends React.Component {
 		constructor(props){
 			super(props);
@@ -263,7 +274,7 @@ class CreateDialog extends React.Component {
 	  
 	  
 	  render() {
-		//MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE  
+		// MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE
 		 
 	    const sportsButtons = this.props.acts.map(item => <button key={item.id} id="button" onClick={this.handleClick}className="btn btn-primary btn-block">{item.name}</button>);
 	    
@@ -274,7 +285,7 @@ class CreateDialog extends React.Component {
 	  }
 	}
 
-//SCHEDULE
+// SCHEDULE
 	class Schedule extends React.Component {
 		constructor(props)
 		{
@@ -305,7 +316,7 @@ class CreateDialog extends React.Component {
 	    );
 	  }
 	}
-//FOOTER
+// FOOTER
 	class Footer extends React.Component {
 	  render() {
 	    return (
@@ -313,7 +324,7 @@ class CreateDialog extends React.Component {
 	    );
 	  }
 	}
-//MAIN
+// MAIN
 	class Main extends React.Component {
 	  render() {
 
