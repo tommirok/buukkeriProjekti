@@ -221,7 +221,7 @@ class CreateDialog extends React.Component {
 	  constructor(props){
 	    super(props);
 	    this.state={
-	    		availables: [],
+	    		availables: 'no',
 	    		acts:[]
 	    		
 	    };
@@ -245,18 +245,19 @@ class CreateDialog extends React.Component {
 	  }
 	  
 	  
-	  handleState(){
-		  this.setState({availables: 'yes' })
+	  handleState(newState){
+		  this.setState({availables: newState });
 	  }
 	  render() {
 		
-			  
+			
 		
 		  
 	    return (
 	      <app id="app" className="Appcomponent">
-	      	<SportButton acts={this.state.acts}/>
-	        <Schedule / >
+	      	<SportButton availables={this.state.availables} onClick={this.handleState} acts={this.state.acts}/>
+	      	
+	      	<Schedule / >
 	      </app>
 	    );
 	  }
@@ -266,20 +267,26 @@ class CreateDialog extends React.Component {
 	class SportButton extends React.Component {
 		constructor(props){
 			super(props);
-			
-			
-			
+				this.onClick= this.onClick.bind(this);
+				this.props.handleState = this.props.handleState.bind(this)
 		}
-	 
-	  
-	  
+		
+		onClick(e){
+			console.log();
+			console.log(e.target.value);
+			const availables = e.target.value;
+			this.props.handleState(availables);
+		}
+		
+		
+		
 	  render() {
 		// MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE
 		 
-	    const sportsButtons = this.props.acts.map(item => <button key={item.id} id="button" onClick={this.handleClick}className="btn btn-primary btn-block">{item.name}</button>);
 	    
 	    
-	    return (<div id="buttongroup" className="btn-group btn-group-lg">{sportsButtons}</div>
+	    
+	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.acts.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block">{item.name}</button>)}</div>
 	    
 	    );
 	  }
