@@ -129,13 +129,13 @@ class Login extends React.Component{
 	  }
 
 	  handleSubmit(){
-		  let user = [{
+		  let user = {
 				  fname : this.state.fname,
 				  lname : this.state.lname,
 				  email : this.state.email,
 				  phone : this.state.phone,
 				  password : this.state.password
-			  }]
+			  }
 		  console.log("pläää")
 		  console.log(user.password)
 		  console.log(JSON.stringify(user))
@@ -221,8 +221,9 @@ class CreateDialog extends React.Component {
 	  constructor(props){
 	    super(props);
 	    this.state={
-	    		availables: 'no',
-	    		acts:[]
+	    		sportid: 420,
+	    		sports:[],
+	    		activities: []
 	    		
 	    };
 	    this.handleState=this.handleState.bind(this);
@@ -233,31 +234,30 @@ class CreateDialog extends React.Component {
 		  callBookker(LOCALHOST+"sports").then((data)=>{
 				data = JSON.parse(data);
 				console.log(data);
-				this.setState({acts: data});
+				this.setState({sports: data});
 				
 		  });
-		  callBookker(LOCALHOST+"/act/sportID=7").then((data1)=>{
-				data1 = JSON.parse(data1);
-				console.log(data1);
-				this.setState({availables: data1});
-				
-		  });
+		 
 	  }
-	  
-	  
+
 	  handleState(newState){
-		  this.setState({availables: newState });
+		  this.setState({sportid: newState });
+		  
+		  callBookker(LOCALHOST+"/act/sportID="+newState).then((data)=>{
+				data = JSON.parse(data);
+				console.log(data);
+				this.setState({activities: data});
+				console.log(this.state.sportid);
+				
+		  });
+		 
 	  }
 	  render() {
-		
-			
-		
-		  
 	    return (
 	      <app id="app" className="Appcomponent">
-	      	<SportButton availables={this.state.availables} onClick={this.handleState} acts={this.state.acts}/>
+	      	<SportButton sportid={this.state.sportid} onClick={this.handleState} sports={this.state.sports}/>
 	      	
-	      	<Schedule / >
+	      	<Schedule activities={this.state.activities} / >
 	      </app>
 	    );
 	  }
@@ -271,11 +271,11 @@ class CreateDialog extends React.Component {
 	
 		}
 		
-		onClick(e){
-			console.log();
-			console.log(e.target.value);
-			const availables = e.target.value;
-			this.props.onClick(availables);
+		onClick(e){	
+			const sportid = e.target.value;
+			
+			
+			this.props.onClick(sportid);
 		}
 		
 		
@@ -283,10 +283,7 @@ class CreateDialog extends React.Component {
 	  render() {
 		// MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE
 		 
-	    
-	    
-	    
-	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.acts.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block">{item.name}</button>)}</div>
+	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.sports.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block">{item.name}</button>)}</div>
 	    
 	    );
 	  }
@@ -297,29 +294,25 @@ class CreateDialog extends React.Component {
 		constructor(props)
 		{
 			super(props);
-			this.state={acts: []}
+			this.state={sports: []}
 
 		}
-		componentDidMount() {
-
-			  
-			  callBookker(LOCALHOST+"act").then((data)=>{
-
-
-				data = JSON.parse(data);
-					console.log(data);
-					this.setState({acts: data});
-			  });
-		  }
+		
+		
+		
 	  render() {
+		  
+		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list">{item.name+" "+item.location+" " + item.description}<button onClick={this.onClick} className="btn btn-primary">varaa</button> </li>)
+		  
 	    return (
-	      <div id="schedule" className="">
+	      
 	        <div id='schedule1' className="well">
-
+	        	<ul>
+	        	{availableActivities}
+	        	</ul>
 	        </div>
-	        <div className="well">
-	          </div>
-	      </div>
+	        
+	     
 	    );
 	  }
 	}
