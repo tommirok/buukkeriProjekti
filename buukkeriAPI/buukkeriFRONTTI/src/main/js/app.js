@@ -16,7 +16,7 @@ const ReactDOM = require ('react-dom');
 const LOCALHOST = 'http://localhost:8090/';
 
 
-//muuttujat
+// muuttujat
 
 
 
@@ -49,8 +49,8 @@ class Header extends React.Component {
 	        <h1>
 
 	          <a id="headerlink" href={LOCALHOST}>
-	            <img href={LOCALHOST+'src/main/img/vapaatvuorot.png'}></img>
-
+	            <img href="./img/vapaatvuorot.png"></img>
+	            TÄMÄ KUVA EI TOIMI
 	          </a>
 	        </h1>
 	      </header>
@@ -71,7 +71,7 @@ function LoginButton(props){
 	);
 }
 
-
+//LOGIN
 class Login extends React.Component{
 	  constructor(props){
 	    super(props);
@@ -82,9 +82,7 @@ class Login extends React.Component{
 			email: "",
 			phone: "",
 			pass: ""
-	    };
-	    
-	    
+	    }; 
 	    this.toggleModal = this.toggleModal.bind(this);
 	    this.closeModal = this.closeModal.bind(this);
 	    this.handleSubmit = this.handleSubmit.bind(this);
@@ -93,7 +91,6 @@ class Login extends React.Component{
 	    this.handleEmail = this.handleEmail.bind(this);
 	    this.handlePhone = this.handlePhone.bind(this);
 	    this.handlePass = this.handlePass.bind(this);
-	    
 	  }
 	  componentDidMount(){
 		 
@@ -121,38 +118,21 @@ class Login extends React.Component{
 	  handlePass(e){
 		  this.setState({pass: e.target.value})
 	  }
-	  
-	  
-		
-	  
-	  
+
 	  handleSubmit(){
-		  let user = {
+		  let user = [{
 				  fname : this.state.fname,
 				  lname : this.state.lname,
 				  email : this.state.email,
 				  phone : this.state.phone,
 				  pass : this.state.pass
-			  }
+			  }]
 		  
-		  
-		  console.log("pläää")
-		  console.log(user)
-		  
-		 
-		  
-		  
-		 
-		  
-	  }
-	 
+		  callUser(LOCALHOST+"users");
+		  console.log(user)  
+	  }	 
   render(){
-		  
-		  
-		
 		return (
-				
-			
 			 <signin className="modalDialog">
 		        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
 		        <div className={"form-wrapper modal " + this.state.modalVisble }  >
@@ -172,7 +152,7 @@ class Login extends React.Component{
 							<div className="form-group">
 							<input key="phone" type="password" placeholder="Salasana" ref="pass" onChange={this.handlePass}  value={this.state.pass}/>
 						</div>
-				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}/>
+				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}>Vahvista</button>
 				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
 		          </form>
 		          
@@ -184,7 +164,7 @@ class Login extends React.Component{
 	}
 
 
-
+//EI TEE MITÄÄN
 class CreateDialog extends React.Component {
 
 	constructor(props) {
@@ -229,63 +209,72 @@ class CreateDialog extends React.Component {
 
 	  constructor(props){
 	    super(props);
-	    this.state={act: []};
+	    this.state={
+	    		availables: [],
+	    		acts:[]
+	    		
+	    };
+	    this.handleState=this.handleState.bind(this);
+	    
 	  }
-
+	  componentDidMount() {		  
+		  //HAETAAN KANNASTA SPORTTIEN NIMIÄ
+		  callBookker(LOCALHOST+"sports").then((data)=>{
+				data = JSON.parse(data);
+				console.log(data);
+				this.setState({acts: data});
+				
+		  });
+		  callBookker(LOCALHOST+"/act/sportID=7").then((data1)=>{
+				data1 = JSON.parse(data1);
+				console.log(data1);
+				this.setState({availables: data1});
+				
+		  });
+	  }
+	  
+	  
+	  handleState(){
+		  this.setState({availables: 'yes' })
+	  }
 	  render() {
+		
+			  
+		
+		  
 	    return (
 	      <app id="app" className="Appcomponent">
-	        <ControlPanel />
-	        <Schedule />
+	      	<SportButton acts={this.state.acts}/>
+	        <Schedule / >
 	      </app>
 	    );
 	  }
 	}
 
-	class ControlPanel extends React.Component {
-	  /*
-		 * constructor(props){ super(props); }
-		 */
+//SPORTBUTTON
+	class SportButton extends React.Component {
+		constructor(props){
+			super(props);
+			
+			
+			
+		}
+	 
+	  
+	  
 	  render() {
-	    return (
-	      <div id="cpanel" className="controlpanelcomponent">
-
-	        <SportButton />
-	      </div>
+		//MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE  
+		 
+	    const sportsButtons = this.props.acts.map(item => <button key={item.id} id="button" onClick={this.handleClick}className="btn btn-primary btn-block">{item.name}</button>);
+	    
+	    
+	    return (<div id="buttongroup" className="btn-group btn-group-lg">{sportsButtons}</div>
+	    
 	    );
 	  }
 	}
 
-	// Testaus metodi nappuloiden tekemisellä
-
-	// mapataan listan tavarat luotaviin nappuloihin
-
-	class SportButton extends React.Component {
-		constructor(props){
-			super(props);
-			this.state={acts: []};
-		}
-	  componentDidMount() {
-
-		  
-		  callBookker(LOCALHOST+"sports").then((data)=>{
-
-
-				data = JSON.parse(data);
-				console.log(data);
-				this.setState({acts: data});
-		  });
-	  }
-	  render() {
-
-	    const sportsButtons = this.state.acts.map(item => <button key={item.id} id="button" className="btn btn-primary btn-block">{item.name}</button>);
-	    console.log(sportsButtons);
-
-	    return (<div id="buttongroup" className="btn-group btn-group-lg">{sportsButtons}</div>);
-	  }
-	}
-
-
+//SCHEDULE
 	class Schedule extends React.Component {
 		constructor(props)
 		{
@@ -316,17 +305,15 @@ class CreateDialog extends React.Component {
 	    );
 	  }
 	}
-
+//FOOTER
 	class Footer extends React.Component {
 	  render() {
 	    return (
-	      <footer id="footer" className="footercomponent">
-	        Footer
-	      </footer>
+	    		<footer id="footer" className="footercomponent">@{new Date().getFullYear()} vapaatvuorot.fi</footer>
 	    );
 	  }
 	}
-
+//MAIN
 	class Main extends React.Component {
 	  render() {
 
