@@ -268,14 +268,14 @@ class CreateDialog extends React.Component {
 		constructor(props){
 			super(props);
 				this.onClick= this.onClick.bind(this);
-				this.props.handleState = this.props.handleState.bind(this)
+	
 		}
 		
 		onClick(e){
 			console.log();
 			console.log(e.target.value);
 			const availables = e.target.value;
-			this.props.handleState(availables);
+			this.props.onClick(availables);
 		}
 		
 		
