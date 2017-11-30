@@ -20,10 +20,10 @@ const LOCALHOST = 'http://localhost:8090/';
 
 
 
-function callUser(url,data){
+function callUser(method,url,data){
 	return new Promise((resolve, reject)=>{
 		const call = new XMLHttpRequest();
-		call.open("POST",url);
+		call.open(method,url);
 		call.onload = ()=> resolve(call.responseText);
 		call.onerror = ()=> reject(call.statusText);
 		call.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -139,7 +139,7 @@ class Login extends React.Component{
 		  console.log("pläää")
 		  console.log(user.password)
 		  console.log(JSON.stringify(user))
-		  console.log(callUser(LOCALHOST+"users/",JSON.stringify(user)))  
+		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
 		  
 	  }
   render(){
