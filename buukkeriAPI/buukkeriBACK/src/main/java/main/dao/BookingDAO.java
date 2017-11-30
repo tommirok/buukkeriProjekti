@@ -51,6 +51,7 @@ public class BookingDAO extends DAO implements BookingDAO_IF{
 	 * @param bk Booking object which is swapped
 	 * @return False if task failed, true if task was done successfully
 	 */
+	/*
 	@Override
 	public boolean updateBooking(Shift_IF shift, Booking_IF bk) {
 		PreparedStatement myStatement = null;
@@ -83,7 +84,7 @@ public class BookingDAO extends DAO implements BookingDAO_IF{
 			return true;
 		}
 	}
-
+*/
 
 	/**Deletes Booking from database
 	 * @param bk Booking object which will be deleted
