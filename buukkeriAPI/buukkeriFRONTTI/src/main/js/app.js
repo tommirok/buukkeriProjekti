@@ -72,16 +72,15 @@ function LoginButton(props){
 	);
 }
 
-// LOGIN
+
+
+//
 class Login extends React.Component{
 	  constructor(props){
 	    super(props);
 	    this.state = {
 	      modalVisble: 'hidden',
-	      fname: "",
-			lname: "",
-			email: "",
-			phone: "",
+			email: "",			
 			password: ""
 	    };
 	    
@@ -94,9 +93,6 @@ class Login extends React.Component{
 	    this.handleLname = this.handleLname.bind(this);
 	    this.handleEmail = this.handleEmail.bind(this);
 	    this.handlePhone = this.handlePhone.bind(this);
-
-	    
-
 	    this.handlePassword = this.handlePassword.bind(this);
 	    
 
@@ -142,7 +138,7 @@ class Login extends React.Component{
 		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
 		  
 	  }
-  render(){
+render(){
 		return (
 			 <signin className="modalDialog">
 		        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
@@ -162,6 +158,135 @@ class Login extends React.Component{
 						</div>,
 							<div className="form-group">
 							<input key="password" type="password" placeholder="Salasana" ref="password" onChange={this.handlePassword}  value={this.state.pass}/>
+						</div>
+				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}>Vahvista</button>
+				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
+		          </form>
+		          
+		        </div>
+		      </signin>
+	    )
+	  }
+
+}
+
+
+
+
+
+
+
+
+
+// LOGIN
+class Registration extends React.Component{
+	  constructor(props){
+	    super(props);
+	    this.state = {
+	      modalVisble: 'hidden',
+	      fname: "",
+			lname: "",
+			email: "",
+			phone: "",
+			password: "",
+			passwordconfirmation: ""
+	    };
+	    
+	    
+
+	    this.toggleModal = this.toggleModal.bind(this);
+	    this.closeModal = this.closeModal.bind(this);
+	    this.handleSubmit = this.handleSubmit.bind(this);
+	    this.handleFname = this.handleFname.bind(this);
+	    this.handleLname = this.handleLname.bind(this);
+	    this.handleEmail = this.handleEmail.bind(this);
+	    this.handlePhone = this.handlePhone.bind(this);
+
+	    
+
+	    this.handlePassword = this.handlePassword.bind(this);
+	    
+
+	  }
+	  componentDidMount(){
+		 
+	  }
+	  toggleModal(){
+	    this.setState({modalVisble: 'visible'});
+	  }
+	  closeModal(){
+	    this.setState({modalVisble: 'hidden'});
+	  }
+
+	  
+	  handleFname(e){
+		  this.setState({fname: e.target.value})
+	  }
+	  handleLname(e){
+		  this.setState({lname: e.target.value})
+	  }
+	  handleEmail(e){
+		  this.setState({email: e.target.value})
+	  }
+	  handlePhone(e){
+		  this.setState({phone: e.target.value})
+	  }
+	  handlePassword(e){
+		  this.setState({password: e.target.value})
+		  
+	  }
+	  handlePasswordConfirm(e){
+		  this.setState({passworconfirmation: e.target.value})
+	  }
+	  
+
+	  handleSubmit(){
+		  if(this.state.fname == ""
+			  || this.state.lname == "" 
+				  || this.state.email == "" 
+					  || this.state.phone == "" 
+						  || this.state.password == "" 
+							 || this.state.passworconfirmation =="" ){
+			  alert("Täytä kaikki kentät ja yritä uudelleen");
+		  }
+		  
+		  else{
+		  let user = {
+				  fname : this.state.fname,
+				  lname : this.state.lname,
+				  email : this.state.email,
+				  phone : this.state.phone,
+				  password : this.state.password
+			  }
+		  console.log("pläää")
+		  console.log(user.password)
+		  console.log(JSON.stringify(user))
+		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
+		  }
+	  }
+  render(){
+		return (
+			 <signin className="modalDialog">
+		        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
+		        <div className={"form-wrapper modal " + this.state.modalVisble }  >
+		        <form name="form" className="form-inline" id="form-submit-data" onSubmit={this.handleSubmit}>
+				          <div className="form-group">
+							<input key="forname" type="text" placeholder="Etunimi" ref="fname"  onChange={this.handleFname} value={this.state.fname} />
+						</div>,
+							<div className="form-group">
+							<input key="lastname" type="text" placeholder="Sukunimi" ref="lname" onChange={this.handleLname}  value={this.state.lname} />
+						</div>,
+							<div className="form-group">
+							<input key="email" type="text" placeholder="Sähköposti" ref="email" onChange={this.handleEmail}  value={this.state.email} />	
+						</div>,
+							<div className="form-group">
+							<input key="phone" type="text" placeholder="Puhelinumero" ref="phone" onChange={this.handlePhone}  value={this.state.phone} />
+						</div>,
+							<div className="form-group">
+							<input key="password" type="password" placeholder="Salasana" ref="password" onChange={this.handlePassword}  value={this.state.pass}/>
+						</div>
+							<div className="form-group">
+							<input key="password" type="password" placeholder="Vahvista salasana" ref="passwordconfirm" onChange={this.handlePasswordConfirm}  value={this.state.passwordconfirmation}/>
 						</div>
 				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}>Vahvista</button>
 				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>Sulje</small></button>
@@ -295,10 +420,13 @@ class CreateDialog extends React.Component {
 		{
 			super(props);
 			this.state={sports: []}
+			this.onClick = this.onClick.bind(this);
 
 		}
 		
-		
+		onClick(){
+			
+		}
 		
 	  render() {
 		  
@@ -331,7 +459,7 @@ class CreateDialog extends React.Component {
 	    return (
 	      <main className="mainComponent">
 	      <Header />
-	      <Login />
+	      <Registration />
 
 	        <App />
 	        <Footer />
