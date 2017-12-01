@@ -18,6 +18,9 @@ public class Booking implements Booking_IF {
 		this.userid = userid;
 		this.shiftid = shiftid;
 	}
+	public Booking() {
+		
+	}
 	/**
 	 * @return userid returns user ID
 	 */
