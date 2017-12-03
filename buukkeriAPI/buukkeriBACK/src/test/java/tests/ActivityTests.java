@@ -77,8 +77,47 @@ public class ActivityTests {
 	}
 	
 	@Test
-	public void fake() {
-		assertTrue("",true);
+	public void testReadMethods() {
+		Activity_IF temp = null;
+		Activity_IF test = null;
+		Activity_IF[] acts = null;
+		temp = actDAO.readActivityById(act.getId());
+		System.out.println(temp.getName());
+		System.out.println(act.getName());
+		assertTrue("ActivityDAO: reading a single Activity by ID failed",temp.getId() == act.getId());
+		assertTrue("ActivityDAO: reading all activities from the database has failed.", (acts = actDAO.readActivities()) != null && acts.length>0);
+		for(int i = 0; i<acts.length; i++) {
+			if(acts[i].getId() == temp.getId()) {
+				test = temp;
+			}
+		}
+		System.out.println(acts.length);
+		assertTrue("ActivityDAO: test Activity was not found readByID", test.getId() == temp.getId());
+		assertTrue("ActivityDAO: reading all activities from the database has failed.", (acts = actDAO.readActivitiesBySportID(act.getId())) != null);
+		for(int i = 0; i<acts.length; i++) {
+			if(acts[i] == temp) {
+				test = temp;
+			}
+		}
+		assertTrue("ActivityDAO: test Activity was not found from by reading with Sport_ID", test.getId() == temp.getId());
+	}
+	
+	public void testCRUD() {
+		String name = "Käpylän suljettu ringette vuoro";
+		Activity_IF temp = new Activity(name, sp.getId(),sport.getID(), "Käpylän jääkenttä", "Maksu SPn tilille, tervetuloa pelaamaan!");
+		Activity_IF[] acts = null;
+		assertTrue("ActivityDAO: Adding temp Activity failed", actDAO.createActivity(temp));
+		assertTrue("ActivityDAO: reading Activity by SP_ID has failed",((acts = actDAO.readActivitiesBySPId(temp.getSpid())) !=null ));
+		assertTrue("ActivityDAO: error reading Activity by SP_ID",acts.length>0);
+		for(int i = 0; i<acts.length; i++) {
+			if(acts[i].getName().equals(name)) {
+				temp = acts[i];
+			}
+		}
+		name = "Vaihdettu Nimi";
+		temp.setName(name);;
+		assertTrue("ActivityDAO: Updating temp Activity failed", actDAO.updateActivity(temp));
+		assertTrue("ActivityDAO: Deleting changed Activity failed", actDAO.deleteActivity(temp));
 	}
 	
 	
