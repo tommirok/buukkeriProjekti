@@ -6,7 +6,7 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent';
-import logo from 'src/main/img/vapaatvuorot.png';
+//import logo from 'src/main/img/vapaatvuorot.png';
 import LocalizedStrings from 'react-localization';
 
 
@@ -80,12 +80,11 @@ class Header extends React.Component {
 	      <header>
 	        <h1>
 
-	          <a id="headerlink" href={LOCALHOST}>
-	            <img href="./img/vapaatvuorot.png"></img>
-	            {strings.picture}
+	          <a id="headerlink" href="http://localhost:8080/assets/">
+	            <img src=".\src\main\img" alt={strings.picture}></img>
+	            
 	          </a>
 	        </h1>
-					<img src={logo} alt={"logo"}/>
 	      </header>
 	    );
 	  }
