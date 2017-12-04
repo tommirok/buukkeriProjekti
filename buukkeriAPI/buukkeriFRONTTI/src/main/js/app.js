@@ -3,17 +3,17 @@
  */
 
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MyAwesomeReactComponent from './MyAwesomeReactComponent';
-
 import LocalizedStrings from 'react-localization';
 
 import Header from "./Header";
-import Signin from "./Signin"
+import LogReg from "./Signin";
 import App from "./Application";
 import Footer from "./Footer";
-
+import {
+	  BrowserRouter as Router,
+	  Route,
+	  NavLink
+	} from 'react-router-dom';
 
 const React = require ('react');
 const ReactDOM = require ('react-dom');
@@ -27,12 +27,14 @@ const ReactDOM = require ('react-dom');
 
 
 	    return (
-	      <main className="mainComponent">
-	      <Signin/>
-	      <App />
-	      <Footer/>
-	      
-	      </main>
+	    		<Router>
+	    	    <div>
+	    	    <LogReg />
+	    	      <hr/>
+	    	      <Route exact path="/assets/" component={App}/>
+	    	    <Footer />
+	    	    </div>
+	    	  </Router>
 	    );
 	  }
 	}

@@ -13,11 +13,10 @@ export default class Signin extends React.Component{
 	}
 	render(){
 		return(
-		<signin>
+		<signin className="container-fluid">
 			<Header/>
 			<Login />
 			<Registration />
-			
 		</signin>
 		)
 	}
