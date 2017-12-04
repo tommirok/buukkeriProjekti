@@ -31,6 +31,8 @@ let strings = new LocalizedStrings({
 		password: "Salasana",
 		submit: "Vahvista",
 		close: "Sulje",
+		confirm: "Vahvista salasana",
+		login: "Kirjaudu sisään",
 
 	},
 	en: {
@@ -42,7 +44,9 @@ let strings = new LocalizedStrings({
 		telnum: "Phone number",
 		password: "Password",
 		submit: "Submit",
-		close: "Close"
+		close: "Close",
+		confirm: "Confirm Password",
+		login: "Login"
 
 	}
 });
@@ -92,19 +96,104 @@ class Header extends React.Component {
 
 // LOGIN BUTTONS
 
+class Signin extends React.Component{
+	constructor(props)
+	{
+		super(props);
+		
+	}
+	render(){
+		return(
+		<signin>
+			<Login />
+			<Registration />
+			
+		</signin>
+		)
+	}
+}
+//LOGIN
+class Login extends React.Component{
+	  constructor(props){
+	    super(props);
+	    this.state = {
+	      modalVisble: 'hidden',
+			email: "",			
+			password: ""
+	    };
+	    
+	    
 
-function LoginButton(props){
-	return(
-			<signin>
-	        <button onClick={props.onClick} className="btn btn-primary btn-lg btn-block">
-	          Kirjaudu sisään
-	        </button>
-	      </signin>
-	);
+	    this.toggleModal = this.toggleModal.bind(this);
+	    this.closeModal = this.closeModal.bind(this);
+	    this.handleSubmit = this.handleSubmit.bind(this);	   
+	    this.handleEmail = this.handleEmail.bind(this);
+	    this.handlePassword = this.handlePassword.bind(this);
+	    
+
+	  }
+	  componentDidMount(){
+		 
+	  }
+	  toggleModal(){
+	    this.setState({modalVisble: 'visible'});
+	  }
+	  closeModal(){
+	    this.setState({modalVisble: 'hidden'});
+	  }
+
+	  
+	 
+	  handleEmail(e){
+		  this.setState({email: e.target.value})
+	  }
+	  handlePassword(e){
+		  this.setState({password: e.target.value})
+	  }
+
+	  handleSubmit(){
+		  let user = {
+				  fname : this.state.fname,
+				  lname : this.state.lname,
+				  email : this.state.email,
+				  phone : this.state.phone,
+				  password : this.state.password
+			  }
+		  console.log("pläää")
+		  console.log(user.password)
+		  console.log(JSON.stringify(user))
+		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
+		  
+		  
+	  }
+render(){
+		return (
+			 <signin className="modalDialog">
+		        <button className="btn btn-success btn-lg" onClick={(e) => this.toggleModal(e)} value="login" > {strings.login} </button>
+		        <div className={"form-wrapper modal " + this.state.modalVisble }  >
+		        <form name="form" className="form-inline" id="form-submit-data" onSubmit={this.handleSubmit}>
+				          
+							<div className="form-group">
+							<input key="email" type="text" placeholder={strings.email} ref="email" onChange={this.handleEmail}  value={this.state.email}/>
+						</div>,
+							
+							<div className="form-group">
+							<input key="password" type="password" placeholder={strings.password} ref="password" onChange={this.handlePassword}  value={this.state.pass}/>
+						</div>
+				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}>{strings.submit}</button>
+				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>{strings.close}</small></button>
+		          </form>
+		          
+		        </div>
+		      </signin>
+	    )
+	  }
+
 }
 
+
 // LOGIN
-class Login extends React.Component{
+class Registration extends React.Component{
 	  constructor(props){
 	    super(props);
 	    this.state = {
@@ -113,7 +202,12 @@ class Login extends React.Component{
 			lname: "",
 			email: "",
 			phone: "",
-			password: ""
+			password: "",
+			passwordconfirmation: "",
+			emailIsValid: false,
+			PohneIsValid: false,
+			PasswordIsValid: false
+				
 	    };
 
 
@@ -125,11 +219,8 @@ class Login extends React.Component{
 	    this.handleLname = this.handleLname.bind(this);
 	    this.handleEmail = this.handleEmail.bind(this);
 	    this.handlePhone = this.handlePhone.bind(this);
-
-
-
 	    this.handlePassword = this.handlePassword.bind(this);
-
+	    this.handlePasswordConfirm= this.handlePasswordConfirm.bind(this);
 
 	  }
 	  componentDidMount(){
@@ -151,6 +242,13 @@ class Login extends React.Component{
 	  }
 	  handleEmail(e){
 		  this.setState({email: e.target.value})
+		  
+		  if(e.target.value == e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+			  console.log("läpi")
+			  this.setState({emaiIsValid : true})
+		  }
+		  
+		  
 	  }
 	  handlePhone(e){
 		  this.setState({phone: e.target.value})
@@ -158,26 +256,57 @@ class Login extends React.Component{
 	  handlePassword(e){
 		  this.setState({password: e.target.value})
 	  }
+	  handlePasswordConfirm(e){
+		  this.setState({passwordconfirmation: e.target.value})
+	  }
+	  
 
 	  handleSubmit(){
-		  let user = [{
+		  if(this.state.fname == ""
+			  || this.state.lname == "" 
+				  || this.state.email == "" 
+					  || this.state.phone == "" 
+						  || this.state.password == "" 
+							 || this.state.passworconfirmation =="" ){
+			  alert("Täytä kaikki kentät ja yritä uudelleen");
+		  }
+		  
+		  
+		  else if( /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.email) ==false) {
+			  alert("Tarkasta sähköposti")
+		  }
+			  
+		  else if(/^\d{10}$/.test(this.state.phone)==false){
+			  alert("Virheellinen puhelin numero")
+		  }
+		  else if(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(this.state.password)==false){
+			  
+		  }
+		  else if(this.state.password != this.state.passwordconfirmation){
+			  alert("Salasana ja salasanan vahvistus täytyy olla sama")
+		  }
+		  
+		  
+		  else{
+		  let user = {
 				  fname : this.state.fname,
 				  lname : this.state.lname,
 				  email : this.state.email,
 				  phone : this.state.phone,
 				  password : this.state.password
-			  }]
+			  }
 		  console.log("pläää")
 		  console.log(user.password)
 		  console.log(JSON.stringify(user))
-		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))
-
+		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
+		  }
+		  
 	  }
   render(){
 		return (
 			 <signin className="modalDialog">
 		        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > {strings.register} </button>
-		        <div className={"form-wrapper modal " + this.state.modalVisble }  >
+		        <div id="form-submit-data" className={"form-wrapper modal form-inline " + this.state.modalVisble }  >
 		        <form name="form" className="form-inline" id="form-submit-data" onSubmit={this.handleSubmit}>
 				          <div className="form-group">
 							<input key="forname" type="text" placeholder={strings.firstname} ref="fname"  onChange={this.handleFname} value={this.state.fname}/>
@@ -193,6 +322,9 @@ class Login extends React.Component{
 						</div>,
 							<div className="form-group">
 							<input key="password" type="password" placeholder={strings.password} ref="password" onChange={this.handlePassword}  value={this.state.pass}/>
+						</div>
+							<div className="form-group">
+							<input key="password" type="password" placeholder={strings.confirm} ref="passwordconfirm" onChange={this.handlePasswordConfirm}  value={this.state.passwordconfirmation}/>
 						</div>
 				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}>{strings.submit}</button>
 				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>{strings.close}</small></button>
@@ -252,11 +384,10 @@ class CreateDialog extends React.Component {
 	  constructor(props){
 	    super(props);
 	    this.state={
-
-
-	    		availables: [],
-	    		acts:[]
-
+	    		sportid: 420,
+	    		sports:[],
+	    		activities: []
+	    		
 	    };
 	    this.handleState=this.handleState.bind(this);
 
@@ -266,30 +397,30 @@ class CreateDialog extends React.Component {
 		  callBookker(LOCALHOST+"sports").then((data)=>{
 				data = JSON.parse(data);
 				console.log(data);
-				this.setState({acts: data});
-
+				this.setState({sports: data});
+				
 		  });
-		  callBookker(LOCALHOST+"/act/sportID=7").then((data1)=>{
-				data1 = JSON.parse(data1);
-				console.log(data1);
-				this.setState({availables: data1});
-
-		  });
+		 
 	  }
 
-
-	  handleState(){
-		  this.setState({availables: 'yes' })
+	  handleState(newState){
+		  this.setState({sportid: newState });
+		  
+		  callBookker(LOCALHOST+"/act/sportID="+newState).then((data)=>{
+				data = JSON.parse(data);
+				console.log(data);
+				this.setState({activities: data});
+				console.log(this.state.sportid);
+				
+		  });
+		 
 	  }
 	  render() {
-
-
-
-
 	    return (
 	      <app id="app" className="Appcomponent">
-	      	<SportButton acts={this.state.acts}/>
-	        <Schedule / >
+	      	<SportButton sportid={this.state.sportid} onClick={this.handleState} sports={this.state.sports}/>
+	      	
+	      	<Schedule activities={this.state.activities} / >
 	      </app>
 	    );
 	  }
@@ -299,21 +430,24 @@ class CreateDialog extends React.Component {
 	class SportButton extends React.Component {
 		constructor(props){
 			super(props);
-
-
-
+				this.onClick= this.onClick.bind(this);
+	
+		}
+		
+		onClick(e){	
+			const sportid = e.target.value;
+			
+			
+			this.props.onClick(sportid);
 		}
 
 
 
 	  render() {
 		// MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE
-
-	    const sportsButtons = this.props.acts.map(item => <button key={item.id} id="button" onClick={this.handleClick}className="btn btn-primary btn-block">{item.name}</button>);
-
-
-	    return (<div id="buttongroup" className="btn-group btn-group-lg">{sportsButtons}</div>
-
+		 
+	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.sports.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block ">{item.name}</button>)}</div>
+	    
 	    );
 	  }
 	}
@@ -323,29 +457,28 @@ class CreateDialog extends React.Component {
 		constructor(props)
 		{
 			super(props);
-			this.state={acts: []}
+			this.state={sports: []}
+			this.onClick = this.onClick.bind(this);
 
 		}
-		componentDidMount() {
-
-
-			  callBookker(LOCALHOST+"act").then((data)=>{
-
-
-				data = JSON.parse(data);
-					console.log(data);
-					this.setState({acts: data});
-			  });
-		  }
+		
+		onClick(){
+			
+		}
+		
 	  render() {
+		  
+		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list"><a>{item.name}</a>{"	"+item.location+"		" + item.description}<button onClick={this.onClick} className="btn btn-primary btn pull-right" >varaa</button> </li>)
+		  
 	    return (
-	      <div id="schedule" className="">
+	      
 	        <div id='schedule1' className="well">
-
+	        	<ul>
+	        	{availableActivities}
+	        	</ul>
 	        </div>
-	        <div className="well">
-	          </div>
-	      </div>
+	        
+	     
 	    );
 	  }
 	}
@@ -365,14 +498,10 @@ class CreateDialog extends React.Component {
 	    return (
 	      <main className="mainComponent">
 	      <Header />
-	      <Login />
-        <App>
-					<MuiThemeProvider>
-						<MyAwesomeReactComponent />
-					</MuiThemeProvider>
-				</App>
-        <Footer />
-      </main>
+	      <Signin/>
+	        <App />
+	        <Footer />
+	      </main>
 	    );
 	  }
 	}
