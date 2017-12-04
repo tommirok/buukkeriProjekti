@@ -33,6 +33,11 @@ let strings = new LocalizedStrings({
 		close: "Sulje",
 		confirm: "Vahvista salasana",
 		login: "Kirjaudu sisään",
+		errdialpasswdmatch: "Salasana ja salasanan vahvistus täytyy olla sama",
+		errdialfillall: "Täytä kaikki kentät ja yritä uudelleen",
+		errdialcheckemail: "Tarkasta sähköposti",
+		errdialcheckphone: "Virheellinen puhelin numero",
+		
 
 	},
 	en: {
@@ -46,7 +51,11 @@ let strings = new LocalizedStrings({
 		submit: "Submit",
 		close: "Close",
 		confirm: "Confirm Password",
-		login: "Login"
+		login: "Login",
+		errdialpasswdmatch: "Passwords are not matching",
+		errdialfillall: "Fill in all the fields and try again",
+		errdialcheckemail: "Check email",
+		errdialcheckphone: "Phone number is incorrect"
 
 	}
 });
@@ -268,22 +277,22 @@ class Registration extends React.Component{
 					  || this.state.phone == "" 
 						  || this.state.password == "" 
 							 || this.state.passworconfirmation =="" ){
-			  alert("Täytä kaikki kentät ja yritä uudelleen");
+			  alert(strings.errdialfillall);
 		  }
 		  
 		  
 		  else if( /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.email) ==false) {
-			  alert("Tarkasta sähköposti")
+			  alert(strings.errdialcheckemail)
 		  }
 			  
 		  else if(/^\d{10}$/.test(this.state.phone)==false){
-			  alert("Virheellinen puhelin numero")
+			  alert(strings.errdialcheckphone)
 		  }
 		  else if(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(this.state.password)==false){
 			  
 		  }
 		  else if(this.state.password != this.state.passwordconfirmation){
-			  alert("Salasana ja salasanan vahvistus täytyy olla sama")
+			  alert(strings.errdialpasswdmatch)
 		  }
 		  
 		  
