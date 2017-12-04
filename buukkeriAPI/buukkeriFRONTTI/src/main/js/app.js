@@ -28,6 +28,7 @@ function callUser(method,url,data){
 		call.onerror = ()=> reject(call.statusText);
 		call.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 		call.send(data);
+		
 	});
 }
 
@@ -46,35 +47,42 @@ function callBookker(url){
 class Header extends React.Component {
 	  render() {
 	    return (
+	    	
 	      <header>
 	        <h1>
 
 	          <a id="headerlink" href={LOCALHOST}>
 	            <img href="./img/vapaatvuorot.png"></img>
-	            TÄMÄ KUVA EI TOIMI
+	            KUVA LINKKI
 	          </a>
 	        </h1>
+	        
 	      </header>
+	      
+	      
 	    );
 	  }
 	}
 
 // LOGIN BUTTONS
 
-
-function LoginButton(props){
-	return(
-			<signin>
-	        <button onClick={props.onClick} className="btn btn-primary btn-lg btn-block">
-	          Kirjaudu sisään
-	        </button>
-	      </signin>
-	);
+class Signin extends React.Component{
+	constructor(props)
+	{
+		super(props);
+		
+	}
+	render(){
+		return(
+		<signin>
+			<Login />
+			<Registration />
+			
+		</signin>
+		)
+	}
 }
-
-
-
-//
+//LOGIN
 class Login extends React.Component{
 	  constructor(props){
 	    super(props);
@@ -88,11 +96,8 @@ class Login extends React.Component{
 
 	    this.toggleModal = this.toggleModal.bind(this);
 	    this.closeModal = this.closeModal.bind(this);
-	    this.handleSubmit = this.handleSubmit.bind(this);
-	    this.handleFname = this.handleFname.bind(this);
-	    this.handleLname = this.handleLname.bind(this);
+	    this.handleSubmit = this.handleSubmit.bind(this);	   
 	    this.handleEmail = this.handleEmail.bind(this);
-	    this.handlePhone = this.handlePhone.bind(this);
 	    this.handlePassword = this.handlePassword.bind(this);
 	    
 
@@ -108,17 +113,9 @@ class Login extends React.Component{
 	  }
 
 	  
-	  handleFname(e){
-		  this.setState({fname: e.target.value})
-	  }
-	  handleLname(e){
-		  this.setState({lname: e.target.value})
-	  }
+	 
 	  handleEmail(e){
 		  this.setState({email: e.target.value})
-	  }
-	  handlePhone(e){
-		  this.setState({phone: e.target.value})
 	  }
 	  handlePassword(e){
 		  this.setState({password: e.target.value})
@@ -137,25 +134,19 @@ class Login extends React.Component{
 		  console.log(JSON.stringify(user))
 		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
 		  
+		  
 	  }
 render(){
 		return (
 			 <signin className="modalDialog">
-		        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
+		        <button className="btn btn-success btn-lg" onClick={(e) => this.toggleModal(e)} value="login" > Kirjaudu sisään </button>
 		        <div className={"form-wrapper modal " + this.state.modalVisble }  >
 		        <form name="form" className="form-inline" id="form-submit-data" onSubmit={this.handleSubmit}>
-				          <div className="form-group">
-							<input key="forname" type="text" placeholder="Etunimi" ref="fname"  onChange={this.handleFname} value={this.state.fname}/>
-						</div>,
-							<div className="form-group">
-							<input key="lastname" type="text" placeholder="Sukunimi" ref="lname" onChange={this.handleLname}  value={this.state.lname}/>
-						</div>,
+				          
 							<div className="form-group">
 							<input key="email" type="text" placeholder="Sähköposti" ref="email" onChange={this.handleEmail}  value={this.state.email}/>
 						</div>,
-							<div className="form-group">
-							<input key="phone" type="text" placeholder="Puhelinumero" ref="phone" onChange={this.handlePhone}  value={this.state.phone}/>
-						</div>,
+							
 							<div className="form-group">
 							<input key="password" type="password" placeholder="Salasana" ref="password" onChange={this.handlePassword}  value={this.state.pass}/>
 						</div>
@@ -189,7 +180,11 @@ class Registration extends React.Component{
 			email: "",
 			phone: "",
 			password: "",
-			passwordconfirmation: ""
+			passwordconfirmation: "",
+			emailIsValid: false,
+			PohneIsValid: false,
+			PasswordIsValid: false
+				
 	    };
 	    
 	    
@@ -201,11 +196,8 @@ class Registration extends React.Component{
 	    this.handleLname = this.handleLname.bind(this);
 	    this.handleEmail = this.handleEmail.bind(this);
 	    this.handlePhone = this.handlePhone.bind(this);
-
-	    
-
 	    this.handlePassword = this.handlePassword.bind(this);
-	    
+	    this.handlePasswordConfirm= this.handlePasswordConfirm.bind(this);
 
 	  }
 	  componentDidMount(){
@@ -226,7 +218,15 @@ class Registration extends React.Component{
 		  this.setState({lname: e.target.value})
 	  }
 	  handleEmail(e){
+		  
 		  this.setState({email: e.target.value})
+		  
+		  if(e.target.value == e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+			  console.log("läpi")
+			  this.setState({emaiIsValid : true})
+		  }
+		  
+		  
 	  }
 	  handlePhone(e){
 		  this.setState({phone: e.target.value})
@@ -236,7 +236,7 @@ class Registration extends React.Component{
 		  
 	  }
 	  handlePasswordConfirm(e){
-		  this.setState({passworconfirmation: e.target.value})
+		  this.setState({passwordconfirmation: e.target.value})
 	  }
 	  
 
@@ -249,6 +249,22 @@ class Registration extends React.Component{
 							 || this.state.passworconfirmation =="" ){
 			  alert("Täytä kaikki kentät ja yritä uudelleen");
 		  }
+		  
+		  
+		  else if( /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.email) ==false) {
+			  alert("Tarkasta sähköposti")
+		  }
+			  
+		  else if(/^\d{10}$/.test(this.state.phone)==false){
+			  alert("Virheellinen puhelin numero")
+		  }
+		  else if(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(this.state.password)==false){
+			  
+		  }
+		  else if(this.state.password != this.state.passwordconfirmation){
+			  alert("Salasana ja salasanan vahvistus täytyy olla sama")
+		  }
+		  
 		  
 		  else{
 		  let user = {
@@ -263,12 +279,13 @@ class Registration extends React.Component{
 		  console.log(JSON.stringify(user))
 		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
 		  }
+		  
 	  }
   render(){
 		return (
 			 <signin className="modalDialog">
 		        <button className="btn btn-primary btn-lg btn-block" onClick={(e) => this.toggleModal(e)} value="login" > Rekisteröidy </button>
-		        <div className={"form-wrapper modal " + this.state.modalVisble }  >
+		        <div id="form-submit-data" className={"form-wrapper modal form-inline " + this.state.modalVisble }  >
 		        <form name="form" className="form-inline" id="form-submit-data" onSubmit={this.handleSubmit}>
 				          <div className="form-group">
 							<input key="forname" type="text" placeholder="Etunimi" ref="fname"  onChange={this.handleFname} value={this.state.fname} />
@@ -408,7 +425,7 @@ class CreateDialog extends React.Component {
 	  render() {
 		// MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE
 		 
-	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.sports.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block">{item.name}</button>)}</div>
+	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.sports.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block ">{item.name}</button>)}</div>
 	    
 	    );
 	  }
@@ -430,7 +447,7 @@ class CreateDialog extends React.Component {
 		
 	  render() {
 		  
-		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list">{item.name+" "+item.location+" " + item.description}<button onClick={this.onClick} className="btn btn-primary">varaa</button> </li>)
+		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list"><a>{item.name}</a>{"	"+item.location+"		" + item.description}<button onClick={this.onClick} className="btn btn-primary btn pull-right" >varaa</button> </li>)
 		  
 	    return (
 	      
@@ -459,8 +476,7 @@ class CreateDialog extends React.Component {
 	    return (
 	      <main className="mainComponent">
 	      <Header />
-	      <Registration />
-
+	      <Signin/>
 	        <App />
 	        <Footer />
 	      </main>
