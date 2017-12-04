@@ -3,22 +3,21 @@
  */
 // Commit comment
 
-
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MyAwesomeReactComponent from './MyAwesomeReactComponent';
+import logo from 'src/main/img/vapaatvuorot.png';
 
 
 const React = require ('react');
 const ReactDOM = require ('react-dom');
-
 
 // const client = require ('./client');
 
 // endpoints
 const LOCALHOST = 'http://localhost:8090/';
 
-
 //muuttujat
-
-
 
 // ajax calls
 function callBookker(url){
@@ -37,10 +36,9 @@ class Header extends React.Component {
 	    return (
 	      <header>
 	        <h1>
-	          <a id="headerlink" href=LOCALHOST>
-	            <img href=LOCALHOST'src/main/img/vapaatvuorot.png'></img>
-	          </a>
+	          <a id="headerlink" href="/">vapaatvuorot.fi</a>
 	        </h1>
+					<img src={logo} alt={"logo"}/>
 	      </header>
 	    );
 	  }
@@ -79,6 +77,12 @@ class Login extends React.Component{
 	  closeModal(){
 	    this.setState({modalVisble: 'hidden'});
 	  }
+
+		DatePickerExampleSimple(){
+		  <div>
+		    <DatePicker hintText="Portrait Dialog" />
+		  </div>
+		}
 
 	  render(){
 		  //We replace these with column names from database
@@ -254,12 +258,15 @@ class CreateDialog extends React.Component {
 	      <main className="mainComponent">
 	      <Header />
 	      <Login />
-
-	        <App />
-	        <Footer />
-	      </main>
+        <App>
+					<MuiThemeProvider>
+						<MyAwesomeReactComponent />
+					</MuiThemeProvider>
+				</App>
+        <Footer />
+      </main>
 	    );
 	  }
 	}
 
-	ReactDOM.render(<Main />, document.getElementById("react"));
+ReactDOM.render(<Main />, document.getElementById("react"));
