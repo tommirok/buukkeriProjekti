@@ -23,8 +23,8 @@ public class BookingDAO extends DAO implements BookingDAO_IF{
 		try{
 			query = "insert into Booking values(?,?);";
 			myStatement = myCon.prepareStatement(query);
-			myStatement.setInt(2, bk.getUserid());
 			myStatement.setInt(1, bk.getShiftid());
+			myStatement.setInt(2, bk.getUserid());
 			count = myStatement.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -51,6 +51,7 @@ public class BookingDAO extends DAO implements BookingDAO_IF{
 	 * @param bk Booking object which is swapped
 	 * @return False if task failed, true if task was done successfully
 	 */
+	/*
 	@Override
 	public boolean updateBooking(Shift_IF shift, Booking_IF bk) {
 		PreparedStatement myStatement = null;
@@ -83,7 +84,7 @@ public class BookingDAO extends DAO implements BookingDAO_IF{
 			return true;
 		}
 	}
-
+*/
 
 	/**Deletes Booking from database
 	 * @param bk Booking object which will be deleted
@@ -184,7 +185,7 @@ public class BookingDAO extends DAO implements BookingDAO_IF{
 				int shiftid = myRs.getInt("Shift_ID");
 				int userid = myRs.getInt("User_ID");
 
-				Booking booking = new Booking(shiftid, userid);
+				Booking booking = new Booking(userid, shiftid);
 				bookings.add(booking);
 			}
 

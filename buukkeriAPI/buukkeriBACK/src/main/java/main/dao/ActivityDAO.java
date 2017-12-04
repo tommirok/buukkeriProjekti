@@ -171,7 +171,7 @@ public class ActivityDAO extends DAO implements ActivityDAO_IF {
 		ResultSet myRs = null;
 
 		try{
-			String sqlSelect = "Select * from Activity where SP_ID = ?";
+			String sqlSelect = "Select * from Activity where Sport_ID = ?";
 			myStatement = myCon.prepareStatement(sqlSelect);
 			myStatement.setInt(1, sport_id);
 			myRs = myStatement.executeQuery();
