@@ -1,6 +1,7 @@
 
 
 
+import LocalizedStrings from 'react-localization';
 
 
 
@@ -11,8 +12,7 @@
 
 
 
-
-export let strings = new LocalizedStrings({
+export  let strings = new LocalizedStrings({
 	fin:{
 		picture:"TÄMÄ KUVA EI TOIMI",
 		register: "Rekisteröidy",
@@ -25,6 +25,11 @@ export let strings = new LocalizedStrings({
 		close: "Sulje",
 		confirm: "Vahvista salasana",
 		login: "Kirjaudu sisään",
+		errdialpasswdmatch: "Salasana ja salasanan vahvistus täytyy olla sama",
+		errdialfillall: "Täytä kaikki kentät ja yritä uudelleen",
+		errdialcheckemail: "Tarkasta sähköposti",
+		errdialcheckphone: "Virheellinen puhelin numero",
+		
 
 	},
 	en: {
@@ -38,7 +43,11 @@ export let strings = new LocalizedStrings({
 		submit: "Submit",
 		close: "Close",
 		confirm: "Confirm Password",
-		login: "Login"
+		login: "Login",
+		errdialpasswdmatch: "Passwords are not matching",
+		errdialfillall: "Fill in all the fields and try again",
+		errdialcheckemail: "Check email",
+		errdialcheckphone: "Phone number is incorrect"
 
 	}
 });

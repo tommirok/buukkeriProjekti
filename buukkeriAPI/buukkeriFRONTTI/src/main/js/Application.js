@@ -1,5 +1,5 @@
 	
-
+import {callBookker} from "./ajaxGet";
 const React = require ('react');
 
 
@@ -7,7 +7,7 @@ const React = require ('react');
 
 
 
-class App extends React.Component {
+export default class App extends React.Component {
 
 	  constructor(props){
 	    super(props);
@@ -22,9 +22,8 @@ class App extends React.Component {
 	  }
 	  componentDidMount() {
 		  // HAETAAN KANNASTA SPORTTIEN NIMIÄ
-		  callBookker(LOCALHOST+"sports").then((data)=>{
+		  callBookker("sports").then((data)=>{
 				data = JSON.parse(data);
-				console.log(data);
 				this.setState({sports: data});
 				
 		  });
@@ -34,11 +33,10 @@ class App extends React.Component {
 	  handleState(newState){
 		  this.setState({sportid: newState });
 		  
-		  callBookker(LOCALHOST+"/act/sportID="+newState).then((data)=>{
-				data = JSON.parse(data);
-				console.log(data);
+		  callBookker("/act/sportID="+newState).then((data)=>{
+				data = JSON.parse(data);		
 				this.setState({activities: data});
-				console.log(this.state.sportid);
+				
 				
 		  });
 		 
@@ -72,14 +70,11 @@ class App extends React.Component {
 
 
 	  render() {
-		// MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE
-		 
-	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.sports.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block ">{item.name}</button>)}</div>
-	    
+		// MAPATAAN SPORTTIEN NIMET NAPPULOIHIN JA TULOSTETAAN NÄYTÖLLE		 
+	    return (<div id="buttongroup" className="btn-group btn-group-lg">{this.props.sports.map((item)=> <button key={item.id} value={item.id} id="button" onClick={this.onClick} className="btn btn-primary btn-block ">{item.name}</button>)}</div>	    
 	    );
 	  }
 	}
-
 // SCHEDULE
 	class Schedule extends React.Component {
 		constructor(props)
@@ -87,26 +82,18 @@ class App extends React.Component {
 			super(props);
 			this.state={sports: []}
 			this.onClick = this.onClick.bind(this);
-
 		}
-		
 		onClick(){
-			
-		}
-		
+		//tähän toiminnalisuutta sitten	
+		}	
 	  render() {
-		  
-		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list"><a>{item.name}</a>{"	"+item.location+"		" + item.description}<button onClick={this.onClick} className="btn btn-primary btn pull-right" >varaa</button> </li>)
-		  
-	    return (
-	      
+		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list"><a>{item.name}</a>{"	"+item.location+"		" + item.description}<button onClick={this.onClick} className="btn btn-primary btn pull-right" >varaa</button> </li>)		  
+	    return (	      
 	        <div id='schedule1' className="well">
 	        	<ul>
 	        	{availableActivities}
 	        	</ul>
 	        </div>
-	        
-	     
 	    );
 	  }
 	}

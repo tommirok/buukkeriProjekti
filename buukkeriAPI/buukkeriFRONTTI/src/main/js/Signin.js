@@ -1,7 +1,11 @@
 
+import Login from "./Login";
+import Registration  from "./Reg";
+import Header from "./Header";
+
 const React = require ('react');
 
-class Signin extends React.Component{
+export default class Signin extends React.Component{
 	constructor(props)
 	{
 		super(props);
@@ -10,6 +14,7 @@ class Signin extends React.Component{
 	render(){
 		return(
 		<signin>
+			<Header/>
 			<Login />
 			<Registration />
 			

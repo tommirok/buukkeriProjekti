@@ -1,8 +1,8 @@
 const React = require ('react');
 const ReactDOM = require ('react-dom');
-
-
-class Registration extends React.Component{
+import {callUser} from "./ajaxPutPostDelete";
+import { strings } from "./LocalizationStrings";
+export default class Registration extends React.Component{
 	  constructor(props){
 	    super(props);
 	    this.state = {
@@ -77,22 +77,22 @@ class Registration extends React.Component{
 					  || this.state.phone == "" 
 						  || this.state.password == "" 
 							 || this.state.passworconfirmation =="" ){
-			  alert("Täytä kaikki kentät ja yritä uudelleen");
+			  alert(strings.errdialfillall);
 		  }
 		  
 		  
 		  else if( /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.email) ==false) {
-			  alert("Tarkasta sähköposti")
+			  alert(strings.errdialcheckemail)
 		  }
 			  
 		  else if(/^\d{10}$/.test(this.state.phone)==false){
-			  alert("Virheellinen puhelin numero")
+			  alert(strings.errdialcheckphone)
 		  }
 		  else if(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(this.state.password)==false){
 			  
 		  }
 		  else if(this.state.password != this.state.passwordconfirmation){
-			  alert("Salasana ja salasanan vahvistus täytyy olla sama")
+			  alert(strings.errdialpasswdmatch)
 		  }
 		  
 		  
@@ -107,7 +107,7 @@ class Registration extends React.Component{
 		  console.log("pläää")
 		  console.log(user.password)
 		  console.log(JSON.stringify(user))
-		  console.log(callUser("POST",LOCALHOST+"users/",JSON.stringify(user)))  
+		  console.log(callUser("POST","users/",JSON.stringify(user)))  
 		  }
 		  
 	  }

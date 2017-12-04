@@ -1,10 +1,10 @@
-
+import {strings} from "./LocalizationStrings";
 
 const React = require ('react');
 
+import {callBookker} from "./ajaxGet";
 
-
-class Login extends React.Component{
+export default class Login extends React.Component{
 	  constructor(props){
 	    super(props);
 	    this.state = {
