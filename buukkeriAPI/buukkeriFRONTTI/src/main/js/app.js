@@ -6,7 +6,7 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent';
-//import logo from 'src/main/img/vapaatvuorot.png';
+
 import LocalizedStrings from 'react-localization';
 
 import Header from "./Header";
