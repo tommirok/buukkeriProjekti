@@ -9,6 +9,7 @@ import Header from "./Header";
 import LogReg from "./Signin";
 import App from "./Application";
 import Footer from "./Footer";
+import Login from './Login';
 import {
 	  BrowserRouter as Router,
 	  Route,
@@ -38,7 +39,4 @@ const ReactDOM = require ('react-dom');
 	    );
 	  }
 	}
-	
-	
-
 ReactDOM.render(<Main />, document.getElementById("react"));
