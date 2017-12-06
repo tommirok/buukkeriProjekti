@@ -1,5 +1,10 @@
 const React = require ('react');
-
+const styles = {
+  width: "14rem"
+};
+const styles2 = {
+  width: "7rem"
+};
 
 export default class Input extends React.Component {
   constructor(props){
@@ -14,11 +19,16 @@ export default class Input extends React.Component {
   }
 	  render() {
 	    return (
-          <div className="col-md-4">
-          <label>{this.props.label}</label>
-          <input key="name" type={this.props.type}onChange={this.onChange} ></input>
-          <label>{this.props.status}</label>
-          </div>
+          <li className="list-group-item">
+          <label style={styles2}>{this.props.label}</label>
+          <input key="name" type={this.props.type}onChange={this.onChange} style={styles} ></input>
+          <label style={styles}>{this.props.status}</label>
+          </li>
 	    );
 	  }
 	}
+  Input.propTypes = {
+    label: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string.isRequired,
+    onChange: React.PropTypes.func.isRequired
+  };

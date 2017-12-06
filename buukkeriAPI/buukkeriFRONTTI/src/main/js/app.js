@@ -9,6 +9,7 @@ import Header from "./Header";
 import LogReg from "./Signin";
 import App from "./Application";
 import Footer from "./Footer";
+import Login from './Login';
 import {
 	  BrowserRouter as Router,
 	  Route,
@@ -41,7 +42,4 @@ export default class Main extends React.Component {
 	    );
 	  }
 	}
-	
-	
-
 ReactDOM.render(<Main />, document.getElementById("react"));
