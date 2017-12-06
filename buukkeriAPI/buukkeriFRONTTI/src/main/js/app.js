@@ -9,11 +9,13 @@ import Header from "./Header";
 import LogReg from "./Signin";
 import App from "./Application";
 import Footer from "./Footer";
-import Login from './Login';
+import Login from './LoginSivu';
+import NoMatch from './NoMatch';
 import {
 	  BrowserRouter as Router,
 	  Route,
-	  NavLink
+	  Link,
+		Switch
 	} from 'react-router-dom';
 
 const React = require ('react');
@@ -23,7 +25,7 @@ const ReactDOM = require ('react-dom');
 
 
 // MAIN
-export default class Main extends React.Component {
+	class Main extends React.Component {
 	  render() {
 
 
@@ -31,9 +33,17 @@ export default class Main extends React.Component {
 	    		<Router>
 	    		
 	    	    <main>
-	    	    <LogReg />
+						<ul>
+							 <li><Link to="/assets/">Home</Link></li>
+							 <li><Link to="/assets/login">About</Link></li>
+						 </ul>
+
 	    	      <hr/>
+							<Switch>
 	    	      <Route exact path="/assets/" component={App}/>
+							<Route path="/assets/login" component={Login}/>
+							<Route component={NoMatch}/>
+							</Switch>
 	    	    <Footer />
 	    		 </main>
 	    	    
