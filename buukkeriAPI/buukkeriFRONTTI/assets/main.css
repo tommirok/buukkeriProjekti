@@ -99,9 +99,9 @@ footer{
   left:50%;
   transform:translate(-50%, -50%);
 
-  padding: 2rem;
+  padding-left: 3rem;
 
-  background:white;
+  background:#e5ffff;
   border:solid 1px #ddd;
   box-shadow: 0 0 2px rgba(0,0,0,.17),0 0 3px rgba(0,0,0,.2);
 }
@@ -111,3 +111,8 @@ footer{
 #form-submit-data{
 	display:inline;
 }
+
+input{
+	border-radius: 10px;
+	
+}]

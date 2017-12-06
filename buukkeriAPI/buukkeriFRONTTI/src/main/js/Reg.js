@@ -135,7 +135,7 @@ render(){
 							<div className="form-group">
 							<input key="password" type="password" placeholder={strings.confirm} ref="passwordconfirm" onChange={this.handlePasswordConfirm}  value={this.state.passwordconfirmation}/>
 						</div>
-				          	<button type="button" className="btn btn-primary" value="Submit"  onClick={this.handleSubmit}>{strings.submit}</button>
+				          	<button type="button" className="btn btn-success" value="Submit"  onClick={this.handleSubmit}>{strings.submit}</button>
 				          	<button className="btn btn-primary" onClick={(e) => this.closeModal(e)} value="close modal"><small>{strings.close}</small></button>
 		          </form>
 

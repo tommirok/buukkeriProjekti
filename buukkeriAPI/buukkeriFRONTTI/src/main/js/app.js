@@ -22,19 +22,22 @@ const ReactDOM = require ('react-dom');
 
 
 // MAIN
-	class Main extends React.Component {
+export default class Main extends React.Component {
 	  render() {
 
 
 	    return (
 	    		<Router>
-	    	    <div>
+	    		
+	    	    <main>
 	    	    <LogReg />
 	    	      <hr/>
 	    	      <Route exact path="/assets/" component={App}/>
 	    	    <Footer />
-	    	    </div>
+	    		 </main>
+	    	    
 	    	  </Router>
+	    	  
 	    );
 	  }
 	}
