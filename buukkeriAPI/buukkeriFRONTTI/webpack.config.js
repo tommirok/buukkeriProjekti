@@ -12,7 +12,7 @@ const PATHS = {
 
 
 module.exports = {
-    entry: './src/main/js/index.js',
+    entry: './src/main/js/app.js',
     devtool: 'sourcemaps',
     cache: true,
     debug: true,

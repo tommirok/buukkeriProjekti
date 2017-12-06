@@ -11,6 +11,8 @@ import App from "./Application";
 import Footer from "./Footer";
 import Login from './LoginSivu';
 import NoMatch from './NoMatch';
+import Registration from './Registration';
+
 import {
 	  BrowserRouter as Router,
 	  Route,
@@ -35,12 +37,14 @@ const ReactDOM = require ('react-dom');
 	    	    <main>
 						<ul>
 							 <li><Link to="/assets/">Home</Link></li>
-							 <li><Link to="/assets/login">About</Link></li>
+							 <li><Link to="/assets/login">Login</Link></li>
 						 </ul>
 
 	    	      <hr/>
 							<Switch>
-	    	      <Route exact path="/assets/" component={App}/>
+							
+							<Route exact path="/assets/" component={App}/>
+							<Route path="/assets/Registration" component={Registration}/>
 							<Route path="/assets/login" component={Login}/>
 							<Route component={NoMatch}/>
 							</Switch>
