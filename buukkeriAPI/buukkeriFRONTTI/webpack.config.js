@@ -22,7 +22,10 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-    	
+
+			devServer: {
+				historyApiFallback:true
+},
         loaders: [
             {
                 test: path.join(__dirname, '.'),
@@ -35,6 +38,7 @@ module.exports = {
             },
             { test: /\.css$/, loader: "style-loader!css-loader" }
         ]
-    
+
     }
+		
 };

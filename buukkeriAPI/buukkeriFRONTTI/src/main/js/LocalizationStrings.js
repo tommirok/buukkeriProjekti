@@ -29,7 +29,8 @@ export  let strings = new LocalizedStrings({
 		errdialfillall: "Täytä kaikki kentät ja yritä uudelleen",
 		errdialcheckemail: "Tarkasta sähköposti",
 		errdialcheckphone: "Virheellinen puhelin numero",
-		
+		nomatch: "Osoiteelle ei löytnyt sivua.",
+
 
 	},
 	en: {
@@ -47,13 +48,9 @@ export  let strings = new LocalizedStrings({
 		errdialpasswdmatch: "Passwords are not matching",
 		errdialfillall: "Fill in all the fields and try again",
 		errdialcheckemail: "Check email",
-		errdialcheckphone: "Phone number is incorrect"
+		errdialcheckphone: "Phone number is incorrect",
+		nomatch: "404 page was not found.",
 
 	}
 });
 strings.setLanguage('en');
-
-
-
-
-
