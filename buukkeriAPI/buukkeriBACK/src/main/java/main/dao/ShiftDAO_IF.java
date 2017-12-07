@@ -8,5 +8,6 @@ public interface ShiftDAO_IF {
 	boolean deleteShift(Shift_IF shift);
 	Shift_IF[] readActivityShifts(int act_id);
 	Shift_IF readShiftById(int ID);
+	Shift_IF[] readBookingsByUserId(int user_id);
 
 }

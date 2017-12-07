@@ -19,19 +19,3 @@ export default class Header extends React.Component {
 	  }
 	}
 
-	function onSetLanguageToFinnish() {
-	  strings.setLanguage('fin');
-	}
-
-	function onSetLanguageToEnglish() {
-	  strings.setLanguage('en');
-	}
-
-	window.onload = function() {
-		if(strings.getInterfaceLanguage() == "fi-FI" || strings.getInterfaceLanguage() == "fi") {
-			onSetLanguageToFinnish()
-		}
-		else {
-			onSetLanguageToEnglish()
-		}
-	}

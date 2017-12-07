@@ -10,6 +10,7 @@ public class Shift implements Shift_IF {
 	private String Shift_date;
 	private double price;
 	private int activityid;
+	private int userid;
 
 	/**
 	 * Empty Constructor
@@ -23,8 +24,9 @@ public class Shift implements Shift_IF {
 	 * @param price Price of the shift
 	 * @param activityid ID number of activity
 	 */
-	public Shift(String shift_time, double price, int activityid) {
+	public Shift(String shift_time,String shift_date, double price, int activityid) {
 		this.Shift_time = shift_time;
+		this.Shift_date = shift_date;
 		this.price = price;
 		this.activityid = activityid;
 	}
@@ -35,12 +37,14 @@ public class Shift implements Shift_IF {
 	 * @param price Price of the shift
 	 * @param activityid ID number of activity
 	 */
-	public Shift(int id, String shift_time, double price, int activityid, String shift_date) {
+	
+	public Shift(int id, String shift_time, String shift_date, double price, int activityid, int userid) {
 		this.id = id;
-		this.Shift_time = shift_time;
+		Shift_time = shift_time;
+		Shift_date = shift_date;
 		this.price = price;
 		this.activityid = activityid;
-		this.Shift_date = shift_date;
+		this.userid = userid;
 	}
 	/**
 	 * @return returns the ID number of Shift
@@ -85,6 +89,13 @@ public class Shift implements Shift_IF {
 	public void setShift_date(String shift_date) {
 		Shift_date = shift_date;
 	}
+	public int getUserId() {
+		return userid;
+		
+	}
 	
+	public void setUserId(int userid) {
+		this.userid = userid;
+	}
 
 }

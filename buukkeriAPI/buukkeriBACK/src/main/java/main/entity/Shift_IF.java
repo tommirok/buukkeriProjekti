@@ -18,4 +18,7 @@ public interface Shift_IF {
 	
 	public void setShift_date(String shift_date);
 
+	public int getUserId();
+
+	public void setUserId(int userid);
 }
