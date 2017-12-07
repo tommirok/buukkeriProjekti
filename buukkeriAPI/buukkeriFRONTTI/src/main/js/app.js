@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import Login from './LoginSivu';
 import NoMatch from './NoMatch';
 import Registration from './Registration';
+import Language from './Language';
 
 import {
 	  BrowserRouter as Router,
@@ -33,8 +34,9 @@ const ReactDOM = require ('react-dom');
 
 	    return (
 	    		<Router>
-	    		
+
 	    	    <main>
+						<Language />
 						<ul>
 							 <li><Link to="/assets/">Home</Link></li>
 							 <li><Link to="/assets/login">Login</Link></li>
@@ -42,7 +44,7 @@ const ReactDOM = require ('react-dom');
 
 	    	      <hr/>
 							<Switch>
-							
+
 							<Route exact path="/assets/" component={App}/>
 							<Route path="/assets/Registration" component={Registration}/>
 							<Route path="/assets/login" component={Login}/>
@@ -50,9 +52,9 @@ const ReactDOM = require ('react-dom');
 							</Switch>
 	    	    <Footer />
 	    		 </main>
-	    	    
+
 	    	  </Router>
-	    	  
+
 	    );
 	  }
 	}
