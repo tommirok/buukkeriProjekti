@@ -14,9 +14,14 @@ import {
 export default class Login extends React.Component{
   constructor(props){
     super(props);
+		let status="";
     this.state = {
-    email: "",
-    pass: ""
+			id: 0,
+			fname:"",
+			lname:"",
+	    email: "",
+	    pass: "",
+			phone: "",
     };
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePass = this.handlePass.bind(this);
@@ -29,11 +34,20 @@ export default class Login extends React.Component{
     this.setState({pass: value})
   }
 	handleLogin(){
-		let user = callBookker("users/"+this.state.email+"&"+this.state.pass).then((data)=>{
-			console.log(data);
+		let promise = callBookker("users/"+this.state.email+"&"+this.state.pass).then((data)=>{
 			if(data!=""){
 				data = JSON.parse(data);
-				console.log(data);
+				let user=data;
+				status="";
+				this.setState({id: user.id,
+				fname: user.fname,
+				lname: user.lname,
+				email: user.email,
+				pass: user.password,
+				phone: user.phone
+				})
+			}else{
+				status=strings.loginstatus;
 			}
 
 
@@ -43,9 +57,9 @@ export default class Login extends React.Component{
     return(
     <app>
       <ul className="list-group">
-      <Input label="Nimi" type="text" onChange={this.handleEmail} />
-      <Input label="Salasana:" type="password" onChange={this.handlePass} />
-      <li className="list-group-item"><button className="btn btn-success">{strings.login}</button>  </li>
+      <Input label={strings.email} type="text" onChange={this.handleEmail} />
+      <Input label={strings.password} type="password" onChange={this.handlePass} />
+      <li className="list-group-item"><button className="btn btn-success" onClick={this.handleLogin}>{strings.login}</button>  </li>
       <li className="list-group-item"><Link to="/assets/Registration"><button className="btn btn-primary">{strings.register}</button></Link>  </li>
       <li className="list-group-item"><Link to="/assets"><button className="btn btn-default btn-small">{strings.close}</button></Link>  </li>
 

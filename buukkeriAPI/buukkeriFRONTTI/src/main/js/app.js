@@ -33,16 +33,16 @@ const ReactDOM = require ('react-dom');
 
 	    return (
 	    		<Router>
-	    		
+
 	    	    <main>
 						<ul>
 							 <li><Link to="/assets/">Home</Link></li>
-							 <li><Link to="/assets/login">Login</Link></li>
+							 <li><Link className="btn btn-success" to="/assets/login">Login</Link></li>
 						 </ul>
 
 	    	      <hr/>
 							<Switch>
-							
+
 							<Route exact path="/assets/" component={App}/>
 							<Route path="/assets/Registration" component={Registration}/>
 							<Route path="/assets/login" component={Login}/>
@@ -50,9 +50,9 @@ const ReactDOM = require ('react-dom');
 							</Switch>
 	    	    <Footer />
 	    		 </main>
-	    	    
+
 	    	  </Router>
-	    	  
+
 	    );
 	  }
 	}
