@@ -19,7 +19,7 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 		String query = null;
 		int count = 0;
 		try{
-			query = "insert ignore into Shift values(default, ?, ?, ?, ?);";
+			query = "insert ignore into Shift values(default, ?, ?, ?, ?, default);";
 			myStatement = myCon.prepareStatement(query);
 			myStatement.setString(2, shift.getShift_time());
 			myStatement.setDouble(3, shift.getPrice());
@@ -54,9 +54,9 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 		String query = null;
 		int count = 0;
 		try{
-			query = "update Shift set Price = ? where ID = ?";
+			query = "update Shift set User_ID = ? where ID = ?";
 			myStatement = myCon.prepareStatement(query);
-			myStatement.setDouble(1, shift.getPrice());
+			myStatement.setDouble(1, shift.getUserId());
 			myStatement.setInt(2, shift.getId());
 			count = myStatement.executeUpdate();
 	}
@@ -136,8 +136,9 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 				float price = myRs.getFloat("Price");
 				String stime = myRs.getString("Shift_Time");
 				String sdate = myRs.getString("Shift_Date");
+				int userid = myRs.getInt("User_ID");
 
-				Shift_IF shift = new Shift(id, stime, price, activityid, sdate);
+				Shift_IF shift = new Shift(id, stime, sdate, price, activityid, userid);
 				shifts.add(shift);
 			}
 
@@ -186,8 +187,9 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 				float price = myRs.getFloat("Price");
 				String stime = myRs.getString("Shift_Time");
 				String sdate = myRs.getString("Shift_Date");
+				int userid = myRs.getInt("User_ID");
 
-				shift = new Shift(id, stime, price, activityid, sdate);
+				shift = new Shift(id, stime, sdate, price, activityid, userid);
 			}
 
 		}
@@ -207,6 +209,54 @@ public class ShiftDAO extends DAO implements ShiftDAO_IF{
 		}
 
 		return shift;
+	}
+	
+	/**Returns all bookings for a specific activity
+	 * @param user_id ID number of the user who is searching
+	 * @return returns a list of bookings
+	 */
+	@Override
+	public Shift_IF[] readBookingsByUserId(int user_id) {
+		ArrayList<Shift_IF> shifts = new ArrayList();
+		PreparedStatement myStatement = null;
+		ResultSet myRs = null;
+
+		try{
+			String sqlSelect = "Select * from Shift where User_ID = ?";
+			myStatement = myCon.prepareStatement(sqlSelect);
+			myStatement.setInt(1, user_id);
+			myRs = myStatement.executeQuery();
+
+			while(myRs.next()) {
+				int id = myRs.getInt("ID");
+				int activityid = myRs.getInt("Activity_ID");
+				float price = myRs.getFloat("Price");
+				String stime = myRs.getString("Shift_Time");
+				String sdate = myRs.getString("Shift_Date");
+				int userid = myRs.getInt("User_ID");
+
+				Shift_IF shift = new Shift(id, stime, sdate, price, activityid, userid);
+				shifts.add(shift);
+			}
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				if (myRs != null)
+					myRs.close();
+				if (myStatement != null)
+					myStatement.close();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		Shift_IF[] ret = new Shift[shifts.size()];
+		return (Shift_IF[])shifts.toArray(ret);
 	}
 
 
