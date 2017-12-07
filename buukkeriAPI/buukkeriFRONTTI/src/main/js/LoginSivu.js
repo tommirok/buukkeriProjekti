@@ -41,16 +41,18 @@ export default class Login extends React.Component{
 	}
   render(){
     return(
-    <div>
+    <app>
       <ul className="list-group">
       <Input label="Nimi" type="text" onChange={this.handleEmail} />
       <Input label="Salasana:" type="password" onChange={this.handlePass} />
-      <li className="list-group-item"><button className="btn btn-success" onClick={this.handleLogin}>Kirjaudu</button>  </li>
-      <li className="list-group-item"><Link className="btn btn-primary" to="/assets/Registration">Rekisteröidy</Link>  </li>
+      <li className="list-group-item"><button className="btn btn-success">{strings.login}</button>  </li>
+      <li className="list-group-item"><Link to="/assets/Registration"><button className="btn btn-primary">{strings.register}</button></Link>  </li>
+      <li className="list-group-item"><Link to="/assets"><button className="btn btn-default btn-small">{strings.close}</button></Link>  </li>
+
       </ul>
 
 
-    </div>
+    </app>
     );
   }
 }
