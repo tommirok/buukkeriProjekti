@@ -67,6 +67,7 @@ export default class Login extends React.Component{
 	  if(this.state.fname!=""){
 		  return (
 				  <app>
+				  
 			      <ul className="list-group">
 			      <li className="list-group-item"><Link to="/assets/UserPage"><button className="btn btn-default btn-small">oma sivu</button></Link>  </li>
 			      <li className="list-group-item"><Link to="/assets"><button className="btn btn-default btn-small">{strings.close}</button></Link>  </li>
