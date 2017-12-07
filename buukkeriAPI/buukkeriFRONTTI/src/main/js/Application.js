@@ -70,11 +70,11 @@ export default class App extends React.Component {
 	  render() {
 		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list"><a>{item.name}</a>{"	"+item.location+"		" + item.description}<Link to="/assets/BookingPage"><button onClick={this.onClick} className="btn btn-primary btn pull-right" >{strings.book}</button></Link> </li>)
 	    return (
-	        <app >
+	        <div id='schedule1' className="well">
 	        	<ul>
 	        	{availableActivities}
 	        	</ul>
-	        </app>
+	        </div>
 	    );
 	  }
 	}

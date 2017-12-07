@@ -14,8 +14,9 @@ import Footer from "./Footer";
 import Login from './LoginSivu';
 import NoMatch from './NoMatch';
 import Registration from './Registration';
+import Language from './Language';
 import BookingPage from './BookingPage';
-import RequireLogin from './RequireLogin';
+//import RequireLogin from './RequireLogin';
 import {
 	  BrowserRouter as Router,
 	  Route,
@@ -37,6 +38,7 @@ import {
 	    		
 	    	    <main>
 	    	    		
+						<Language />
 						<ul>
 							 <li><Link to="/assets/">Home</Link></li>
 							 <li><Link to="/assets/login">Login</Link></li>
