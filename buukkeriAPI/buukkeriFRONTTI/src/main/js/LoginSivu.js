@@ -31,7 +31,7 @@ export default class Login extends React.Component{
   }
   render(){
     return(
-    <div>
+    <app>
       <ul className="list-group">
       <Input label="Nimi" type="text" onChange={this.handleEmail} />
       <Input label="Salasana:" type="password" onChange={this.handlePass} />
@@ -40,7 +40,7 @@ export default class Login extends React.Component{
       </ul>
       
       
-    </div>
+    </app>
     );
   }
 }

@@ -3,7 +3,7 @@
  */
 
 
-import LocalizedStrings from 'react-localization';
+import strings from 'react-localization';
 
 import Header from "./Header";
 import LogReg from "./Signin";
@@ -39,6 +39,11 @@ const ReactDOM = require ('react-dom');
 							 <li><Link to="/assets/">Home</Link></li>
 							 <li><Link to="/assets/login">Login</Link></li>
 						 </ul>
+						 <signin>
+					        <Link to="/assets/login"><button className="btn btn-success btn-lg" > {strings.login} </button></Link>
+
+						 </signin>
+						 
 
 	    	      <hr/>
 							<Switch>
