@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import Login from './LoginSivu';
 import NoMatch from './NoMatch';
 import Registration from './Registration';
+import Language from './Language';
 
 import {
 	  BrowserRouter as Router,
@@ -35,6 +36,7 @@ const ReactDOM = require ('react-dom');
 	    		<Router>
 
 	    	    <main>
+						<Language />
 						<ul>
 							 <li><Link to="/assets/">Home</Link></li>
 							 <li><Link className="btn btn-success" to="/assets/login">Login</Link></li>
