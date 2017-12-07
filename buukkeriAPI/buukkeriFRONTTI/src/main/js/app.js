@@ -2,6 +2,8 @@
  * @author Tommi Rokolampi
  */
 
+const React = require ('react');
+const ReactDOM = require ('react-dom');
 
 import LocalizedStrings from 'react-localization';
 import {strings} from './LocalizationStrings';
@@ -12,7 +14,8 @@ import Footer from "./Footer";
 import Login from './LoginSivu';
 import NoMatch from './NoMatch';
 import Registration from './Registration';
-
+import BookingPage from './BookingPage';
+import RequireLogin from './RequireLogin';
 import {
 	  BrowserRouter as Router,
 	  Route,
@@ -20,8 +23,6 @@ import {
 		Switch
 	} from 'react-router-dom';
 
-const React = require ('react');
-const ReactDOM = require ('react-dom');
 
 
 
@@ -35,6 +36,7 @@ const ReactDOM = require ('react-dom');
 	    		<Router>
 	    		
 	    	    <main>
+	    	    		
 						<ul>
 							 <li><Link to="/assets/">Home</Link></li>
 							 <li><Link to="/assets/login">Login</Link></li>
@@ -48,10 +50,16 @@ const ReactDOM = require ('react-dom');
 	    	      <hr/>
 							<Switch>
 							
-							<Route exact path="/assets/" component={App}/>
+							<Route exact path="/assets" component={App}/>
 							<Route path="/assets/Registration" component={Registration}/>
 							<Route path="/assets/login" component={Login}/>
-							<Route component={NoMatch}/>
+							
+							
+							<Route component={RequireLogin}>
+						    <Route path="assets/BookingPage" component={BookingPage}/>
+						   
+						  </Route>
+						    <Route component={NoMatch}/>
 							</Switch>
 	    	    <Footer />
 	    		 </main>
@@ -62,3 +70,5 @@ const ReactDOM = require ('react-dom');
 	  }
 	}
 ReactDOM.render(<Main />, document.getElementById("react"));
+
+

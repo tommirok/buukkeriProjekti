@@ -17,18 +17,7 @@ main{
     "footer footer  footer footer ";
 }
 
-#schedule{
-  display:grid;
-  background-color: #7E57C2;
-  width:100%;
-  height:90vh;
 
-  grid-template-rows: 80px auto;
-
-  grid-template-areas:
-    "schedule1"
-    "schedule2";
-}
 
 header{
   grid-area: header;

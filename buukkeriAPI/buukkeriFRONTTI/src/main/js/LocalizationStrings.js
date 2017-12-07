@@ -30,7 +30,7 @@ export  let strings = new LocalizedStrings({
 		errdialcheckemail: "Tarkasta sähköposti",
 		errdialcheckphone: "Virheellinen puhelin numero",
 		nomatch: "Osoiteelle ei löytnyt sivua.",
-
+		book: "Varaa!",
 
 	},
 	en: {
@@ -50,6 +50,7 @@ export  let strings = new LocalizedStrings({
 		errdialcheckemail: "Check email",
 		errdialcheckphone: "Phone number is incorrect",
 		nomatch: "404 page was not found.",
+		book: "book now!",
 
 	}
 });

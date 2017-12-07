@@ -20,6 +20,7 @@ export default class Login extends React.Component{
     };
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePass = this.handlePass.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
   handleEmail(value){
     this.setState({email: value})
@@ -35,7 +36,7 @@ export default class Login extends React.Component{
       <ul className="list-group">
       <Input label="Nimi" type="text" onChange={this.handleEmail} />
       <Input label="Salasana:" type="password" onChange={this.handlePass} />
-      <li className="list-group-item"><button className="btn btn-success">{strings.login}</button>  </li>
+      <li className="list-group-item"><button onClick={this.handleLogin} className="btn btn-success">{strings.login}</button>  </li>
       <li className="list-group-item"><Link to="/assets/Registration"><button className="btn btn-primary">{strings.register}</button></Link>  </li>
       <li className="list-group-item"><Link to="/assets"><button className="btn btn-default btn-small">{strings.close}</button></Link>  </li>
 
