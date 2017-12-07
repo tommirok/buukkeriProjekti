@@ -3,8 +3,8 @@
  */
 
 
-import strings from 'react-localization';
-
+import LocalizedStrings from 'react-localization';
+import {strings} from './LocalizationStrings';
 import Header from "./Header";
 import LogReg from "./Signin";
 import App from "./Application";
