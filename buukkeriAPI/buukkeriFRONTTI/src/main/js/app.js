@@ -17,9 +17,6 @@ import Registration from './Registration';
 import Language from './Language';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
-
 import BookingPage from './BookingPage';
 import RequireLogin from './RequireLogin';
 import UserPage from './UserPage';
@@ -29,6 +26,7 @@ import {
 	  Link,
 		Switch
 	} from 'react-router-dom';
+import SPRegistration from "./SPRegistration";
 
 
 
@@ -59,7 +57,8 @@ import {
 	    		<Router>
 
 	    	    <main>
-						<header>
+	    	    	<header>
+
 						<Link to="/assets/">
 							<img src="/src/main/img/vapaatvuorot.png" alt="Vapaatvuorot.fi" className="logo"></img>
 						</Link>
@@ -72,6 +71,7 @@ import {
 							<Route exact path="/assets" component={App}/>
 
 							<Route path="/assets/Registration" component={Registration}/>
+							<Route path="/assets/SPRegistration" component={SPRegistration}/>
 							<Route path="/assets/login" component={Login} handler={this.handler}/>
 							<Route component={RequireLogin}>
 							<Route path="assets/UserPage" component={UserPage}/>
