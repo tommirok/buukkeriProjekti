@@ -32,5 +32,9 @@ public class ShiftService {
 	public Shift_IF[] getShiftByActID(int id) {
 		return shiftdao.readActivityShifts(id);
 	}
+
+	public Shift_IF[] readBookingByUserId(int user_id) {
+		return shiftdao.readBookingsByUserId(user_id);
+	}
 	
 }

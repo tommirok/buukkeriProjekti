@@ -39,4 +39,8 @@ public class ShiftController {
 	public Shift_IF[] getShiftByActID(@PathVariable("id") int id) {
 		return service.getShiftByActID(id);
 	}
+	@RequestMapping(value ="/user_id={user_ID}" ,method = RequestMethod.GET)
+	public Shift_IF[] readBookingsByUserId(@PathVariable("user_ID")int user_id) {
+		return service.readBookingByUserId(user_id);
+	}
 }

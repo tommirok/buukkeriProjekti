@@ -1,5 +1,13 @@
 import SportButton from './Components/SportButton';
 import {callBookker} from "./ajaxGet";
+import {
+	  BrowserRouter as Router,
+	  Route,
+	  Link,
+		Switch
+	} from 'react-router-dom';
+import {strings} from "./LocalizationStrings";
+
 const React = require ('react');
 
 
@@ -8,7 +16,7 @@ export default class App extends React.Component {
 	  constructor(props){
 	    super(props);
 	    this.state={
-	    		sportid: 420,
+	    		sportid: 10,
 	    		sports:[],
 	    		activities: []
 
@@ -60,7 +68,7 @@ export default class App extends React.Component {
 		//tähän toiminnalisuutta sitten
 		}
 	  render() {
-		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list"><a>{item.name}</a>{"	"+item.location+"		" + item.description}<button onClick={this.onClick} className="btn btn-primary btn pull-right" >varaa</button> </li>)
+		 const availableActivities = this.props.activities.map((item)=> <li key={item.id} value={item.id} id="lists"  className="act-list"><a>{item.name}</a>{"	"+item.location+"		" + item.description}<Link to="/assets/BookingPage"><button onClick={this.onClick} className="btn btn-primary btn pull-right" >{strings.book}</button></Link> </li>)
 	    return (
 	        <div id='schedule1' className="well">
 	        	<ul>

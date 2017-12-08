@@ -12,7 +12,7 @@ export default class NoMatch extends React.Component {
 
 	      <header>
 	        <h1>
-	        {string.nomatch}
+	        {strings.nomatch}
 
 	        </h1>
 	      </header>
