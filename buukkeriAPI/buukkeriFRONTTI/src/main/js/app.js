@@ -73,11 +73,11 @@ import {
 									
 							<Route path="/assets/Registration" component={Registration}/>
 							<Route path="/assets/login" component={Login} handler={this.handler}/>
+							<Route component={RequireLogin}>
 							<Route path="assets/UserPage" component={UserPage}/>
 						    <Route path="assets/BookingPage" component={BookingPage}/>
-						   
-						
-						    <Route component={NoMatch}/>
+							</Route>
+							<Route component={NoMatch}/>
 							</Switch>
 	    	    <Footer />
 	    		 </main>
