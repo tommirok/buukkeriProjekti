@@ -84,8 +84,8 @@ import SPRegistration from "./SPRegistration";
 							<Route path="/assets/SPRegistration" component={SPRegistration}/>
 							<Route path="/assets/login" component={Login} handler={this.handler}/>
 							<Route component={RequireLogin}>
-							<Route path="assets/UserPage" component={UserPage}/>
-						    <Route path="assets/BookingPage" component={BookingPage}/>
+							<Route path="/assets/UserPage" component={UserPage}/>
+						    <Route path="/assets/BookingPage" component={BookingPage}/>
 							</Route>
 							<Route component={NoMatch}/>
 							</Switch>

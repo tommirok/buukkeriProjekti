@@ -119,7 +119,7 @@ render(){
 				          	<button type="button" className="btn btn-success" value="Submit"  onClick={this.handleSubmit}>{strings.submit}</button>
 				          	
 		          </form>
-
+		          <li className="list-group-item"><Link to="/assets"><button className="btn btn-default btn-small">{strings.close}</button></Link>  </li>
 		        </div>
 		      </app>
 	    )
