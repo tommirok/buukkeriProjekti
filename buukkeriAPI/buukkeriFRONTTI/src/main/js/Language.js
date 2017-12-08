@@ -30,10 +30,10 @@ export default class Language extends React.Component {
   }
   render() {
     return(
-      <header>
-      <button onClick = {this.handleFIN}>FIN</button>
-      <button onClick = {this.handleEN}>ENG</button>
-      </header>
+      <div className="btn-group">
+        <button type="button" className="btn btn-primary" onClick={this.handleFIN}>FIN</button>
+        <button type="button" className="btn btn-primary" onClick={this.handleEN}>ENG</button>
+      </div>
     );
   }
 }
