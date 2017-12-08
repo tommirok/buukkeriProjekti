@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+.Language{
+  margin-right: 10px;
+}
+
+.logo{
+  width: 150px;
+  height: auto;
+  margin: 20px;
+}
+
+.login{
+  margin-right: 20px;
+  margin-top: 0;
+}
+
+.btn-group{
+
+}
+=======
 /*setting grid grid*/
 main{
   background-color: none;
@@ -103,3 +123,4 @@ input{
 	border-radius: 10px;
 	
 }]
+>>>>>>> 49d6b6ae1abbab5eecaa9032bb8633ec9d2a49f7

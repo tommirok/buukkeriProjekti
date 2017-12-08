@@ -15,6 +15,11 @@ import Login from './LoginSivu';
 import NoMatch from './NoMatch';
 import Registration from './Registration';
 import Language from './Language';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
+
 import BookingPage from './BookingPage';
 import RequireLogin from './RequireLogin';
 import UserPage from './UserPage';
@@ -54,6 +59,16 @@ import {
 	    		<Router>
 	    		
 	    	    <main>
+
+						<Link to="/assets/">
+							<img src="/src/main/img/vapaatvuorot.png" alt="Vapaatvuorot.fi" className="logo"></img>
+						</Link>
+					
+						
+
+	    	   
+							
+
 	    	    		
 						<Language />
 						<ul>
@@ -65,8 +80,8 @@ import {
 
 						 </signin>
 						 
-
-	    	      <hr/>
+						 
+	    	   
 							<Switch>
 							
 							<Route exact path="/assets" component={App}/>
