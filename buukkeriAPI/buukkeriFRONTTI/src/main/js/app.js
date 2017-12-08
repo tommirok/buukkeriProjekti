@@ -43,10 +43,10 @@ import {
 			this.handler = this.handler.bind(this)
 		}
 		handler() {
-		    
+
 		    this.setState({
 		      loggedin: true
-		      
+
 		    })
 		    console.log(this.state.loggedin)
 		    console.log("täällä")
@@ -57,35 +57,20 @@ import {
 
 	    return (
 	    		<Router>
-	    		
-	    	    <main>
 
+	    	    <main>
+						<header>
 						<Link to="/assets/">
 							<img src="/src/main/img/vapaatvuorot.png" alt="Vapaatvuorot.fi" className="logo"></img>
 						</Link>
-					
-						
+						<Link className="btn btn-success btn-lg" to="/assets/login">{strings.login}</Link>
 
-	    	   
-							
-
-	    	    		
 						<Language />
-						<ul>
-							 <li><Link to="/assets/">Home</Link></li>
-							 <li><Link to="/assets/login">Login</Link></li>
-						 </ul>
-						 <signin>
-					        <Link to="/assets/login"><button className="btn btn-success btn-lg" > {strings.login} </button></Link>
-
-						 </signin>
-						 
-						 
-	    	   
+						</header>
 							<Switch>
-							
+
 							<Route exact path="/assets" component={App}/>
-									
+
 							<Route path="/assets/Registration" component={Registration}/>
 							<Route path="/assets/login" component={Login} handler={this.handler}/>
 							<Route component={RequireLogin}>
@@ -96,12 +81,10 @@ import {
 							</Switch>
 	    	    <Footer />
 	    		 </main>
-	    	    
+
 	    	  </Router>
-	    	  
+
 	    );
 	  }
 	}
 ReactDOM.render(<Main />, document.getElementById("react"));
-
-
