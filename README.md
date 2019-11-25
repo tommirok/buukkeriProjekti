@@ -1,7 +1,4 @@
 # buukkeriAPI
 buukkeriAPI
 
-Frontend käynnistäminen
-webpack-dev-server --inline --hot
-
-Backend käynnistäminen
+Base for sports activity reserving platform 
